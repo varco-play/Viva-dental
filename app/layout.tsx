@@ -8,8 +8,8 @@ import InquiryPopup from '@/components/InquiryPopup'
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'Viva Dental — Стоматологическая клиника',
-  description: 'Профессиональная стоматологическая помощь. Лечение, протезирование, имплантация, ортодонтия.',
+  title: 'Viva Dental Group — Стоматологическая клиника',
+  description: 'Профессиональная стоматологическая помощь. Лечение, протезирование, имплантация, ортодонтия. Запись онлайн.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru" className={inter.variable}>
       <body>
         <Navbar />
-        <main>{children}</main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
         <InquiryPopup />
       </body>

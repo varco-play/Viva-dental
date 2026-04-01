@@ -1,99 +1,96 @@
-import { Star, Play } from 'lucide-react'
+'use client'
+import { useEffect, useRef } from 'react'
+import { Star, ThumbsUp, ArrowRight } from 'lucide-react'
 import PopupButton from '@/components/PopupButton'
 import { reviews } from '@/lib/data'
 
 const blogPosts = [
-  {
-    id: 1,
-    title: 'Как перестать бояться стоматолога',
-    date: '15 марта 2025',
-    category: 'Советы',
-    preview: 'Дентофобия встречается у 30% взрослых. Делимся проверенными способами справиться со страхом перед визитом к врачу...',
-    hasVideo: true,
-  },
-  {
-    id: 2,
-    title: 'Имплант или мост: что лучше в 2025 году?',
-    date: '2 марта 2025',
-    category: 'Имплантация',
-    preview: 'Подробное сравнение двух методов восстановления зуба: стоимость, долговечность, противопоказания и реальные отзывы пациентов.',
-    hasVideo: false,
-  },
-  {
-    id: 3,
-    title: 'Invisalign vs брекеты: личный опыт пациента',
-    date: '20 февраля 2025',
-    category: 'Ортодонтия',
-    preview: 'Наша пациентка Елена рассказывает об опыте ношения элайнеров Invisalign в течение 14 месяцев — честно и подробно.',
-    hasVideo: true,
-  },
-  {
-    id: 4,
-    title: 'Как правильно чистить зубы с брекетами',
-    date: '8 февраля 2025',
-    category: 'Гигиена',
-    preview: 'Ортодонт Дмитрий Александрович объясняет, как ухаживать за зубами во время ортодонтического лечения — инструменты и методика.',
-    hasVideo: true,
-  },
+  { title: 'Имплантация зубов: всё что нужно знать', date: '15 марта 2025', category: 'Имплантация', readTime: '5 мин' },
+  { title: 'Брекеты или элайнеры: что выбрать?', date: '2 марта 2025', category: 'Ортодонтия', readTime: '4 мин' },
+  { title: 'Как сохранить белизну зубов после отбеливания', date: '18 февраля 2025', category: 'Эстетика', readTime: '3 мин' },
 ]
 
 export default function ReviewsPage() {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    )
+    el.querySelectorAll('.reveal, .reveal-scale').forEach(e => obs.observe(e))
+    return () => obs.disconnect()
+  }, [])
+
   return (
-    <div className="pt-20">
-      {/* Header */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
-        <div className="container-wide">
-          <h1 className="section-title text-4xl md:text-5xl">Отзывы и блог</h1>
-          <p className="section-subtitle">
-            Реальные отзывы наших пациентов и полезные материалы от врачей клиники.
-          </p>
+    <div ref={ref}>
+      {/* Hero */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-navy" />
+        <div className="absolute inset-0 bg-dots opacity-30" />
+        <div className="container-wide relative z-10 text-center">
+          <div className="tag justify-center animate-fade-up"><span className="tag-dot" />Отзывы</div>
+          <h1 className="text-5xl md:text-6xl font-black text-white mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+            Что говорят<br /><span className="text-gradient">наши пациенты</span>
+          </h1>
+
           {/* Rating summary */}
-          <div className="flex flex-wrap gap-8 mt-6">
-            <div className="flex items-center gap-3">
-              <div className="text-4xl font-bold text-charcoal">5.0</div>
-              <div>
-                <div className="flex text-gold text-lg">{'★★★★★'}</div>
-                <div className="text-sm text-muted">на основе 5 000+ отзывов</div>
+          <div className="inline-flex flex-col sm:flex-row items-center gap-6 mt-6 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+            <div className="text-center">
+              <div className="text-6xl font-black text-white">4.9</div>
+              <div className="flex gap-0.5 mt-1 justify-center">
+                {[1,2,3,4,5].map(n => <Star key={n} size={18} className="text-yellow-400 fill-yellow-400" />)}
               </div>
+              <div className="text-white/40 text-sm mt-1">из 5</div>
             </div>
-            {[5, 4, 3].map(stars => (
-              <div key={stars} className="flex items-center gap-2 text-sm">
-                <span className="text-muted">{stars}★</span>
-                <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gold rounded-full"
-                    style={{ width: stars === 5 ? '90%' : stars === 4 ? '8%' : '2%' }}
-                  />
-                </div>
-                <span className="text-muted">{stars === 5 ? '90%' : stars === 4 ? '8%' : '2%'}</span>
-              </div>
-            ))}
+            <div className="w-px h-14 bg-white/10 hidden sm:block" />
+            <div className="text-left">
+              <div className="text-white/70 text-sm">На основе</div>
+              <div className="text-2xl font-black text-white">2000+ отзывов</div>
+              <div className="text-white/40 text-sm">Google · Яндекс · ПроДокторов</div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Reviews grid */}
-      <section className="py-16 bg-white">
+      <section className="section bg-surface">
         <div className="container-wide">
-          <h2 className="text-2xl font-bold text-charcoal mb-8">Отзывы пациентов</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reviews.map((r) => (
-              <div key={r.id} className="card flex flex-col">
-                <div className="flex items-center gap-1 mb-3">
-                  {Array.from({ length: r.rating }).map((_, i) => (
-                    <Star key={i} size={16} className="text-gold fill-gold" />
-                  ))}
-                  {Array.from({ length: 5 - r.rating }).map((_, i) => (
-                    <Star key={i} size={16} className="text-gray-300" />
+            {reviews.map((review, i) => (
+              <div
+                key={review.id}
+                className="reveal reveal-scale bg-white rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 flex flex-col gap-4"
+                style={{ transitionDelay: `${i * 80}ms` }}
+              >
+                {/* Stars */}
+                <div className="flex gap-0.5">
+                  {[1,2,3,4,5].map(n => (
+                    <Star key={n} size={14} className={n <= review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-200'} />
                   ))}
                 </div>
-                <p className="text-sm text-charcoal leading-relaxed flex-1">"{r.text}"</p>
-                <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
-                  <div>
-                    <div className="font-semibold text-sm text-charcoal">{r.name}</div>
-                    <div className="text-xs text-primary">{r.service}</div>
+
+                {/* Text */}
+                <p className="text-charcoal text-sm leading-relaxed flex-1">"{review.text}"</p>
+
+                {/* Service tag */}
+                {review.service && (
+                  <span className="inline-block px-3 py-1 rounded-full bg-teal/10 text-teal text-xs font-semibold self-start">
+                    {review.service}
+                  </span>
+                )}
+
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-3 border-t border-gray-50">
+                  <div className="w-10 h-10 rounded-full bg-gradient-teal flex items-center justify-center text-white font-black text-sm flex-shrink-0">
+                    {review.name.charAt(0)}
                   </div>
-                  <span className="text-xs text-muted">{r.date}</span>
+                  <div>
+                    <div className="font-bold text-charcoal text-sm">{review.name}</div>
+                    {review.date && <div className="text-xs text-muted">{review.date}</div>}
+                  </div>
+                  <ThumbsUp size={14} className="ml-auto text-gray-200" />
                 </div>
               </div>
             ))}
@@ -101,42 +98,58 @@ export default function ReviewsPage() {
         </div>
       </section>
 
-      {/* Video blog */}
-      <section className="py-16 bg-surface">
+      {/* Blog */}
+      <section className="section bg-white">
         <div className="container-wide">
-          <h2 className="text-2xl font-bold text-charcoal mb-2">Блог и видео</h2>
-          <p className="text-muted mb-8">Полезные статьи и видео от наших специалистов</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {blogPosts.map((post) => (
-              <div key={post.id} className="card flex flex-col">
-                <div className="w-full h-36 bg-gradient-to-br from-primary/10 to-blue-50 rounded-xl mb-4 flex items-center justify-center relative">
-                  {post.hasVideo && (
-                    <div className="w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center shadow-lg cursor-pointer hover:bg-primary transition-colors">
-                      <Play size={20} className="text-white ml-1" />
-                    </div>
-                  )}
-                  {!post.hasVideo && <span className="text-4xl">📖</span>}
-                  <span className="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-0.5 rounded-full">{post.category}</span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+              <div className="tag reveal"><span className="tag-dot" />Блог</div>
+              <h2 className="section-title reveal delay-100 mb-0">Полезные статьи</h2>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {blogPosts.map((post, i) => (
+              <div
+                key={post.title}
+                className="reveal group cursor-pointer"
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
+                <div className="card h-full flex flex-col gap-4 group-hover:border-teal/30">
+                  {/* Placeholder image */}
+                  <div className="h-40 rounded-xl bg-gradient-to-br from-navy to-teal-dark flex items-center justify-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-dots opacity-30" />
+                    <span className="text-3xl relative z-10">📝</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2.5 py-1 rounded-full bg-teal/10 text-teal text-xs font-semibold">{post.category}</span>
+                    <span className="text-xs text-muted">{post.readTime} чтения</span>
+                  </div>
+                  <h3 className="font-bold text-charcoal group-hover:text-teal transition-colors leading-snug flex-1">{post.title}</h3>
+                  <div className="flex items-center justify-between text-xs text-muted pt-2 border-t border-gray-50">
+                    <span>{post.date}</span>
+                    <span className="flex items-center gap-1 text-teal font-semibold">
+                      Читать <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
                 </div>
-                <div className="text-xs text-muted mb-2">{post.date}</div>
-                <h3 className="font-semibold text-charcoal text-sm leading-snug mb-2">{post.title}</h3>
-                <p className="text-xs text-muted leading-relaxed flex-1">{post.preview}</p>
-                <button className="text-primary text-xs font-medium mt-3 text-left hover:underline">Читать далее →</button>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Leave review CTA */}
-      <section className="py-14 bg-white border-t border-gray-100">
-        <div className="container-wide text-center">
-          <h2 className="text-3xl font-bold text-charcoal mb-4">Были у нас? Оставьте отзыв</h2>
-          <p className="text-muted mb-8 max-w-md mx-auto">Ваше мнение помогает нам становиться лучше и помогает другим пациентам сделать выбор.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <PopupButton label="Оставить отзыв" variant="outline" className="text-base py-3 px-6" />
-            <PopupButton label="Записаться на приём" variant="primary" className="text-base py-3 px-6" />
-          </div>
+      {/* CTA */}
+      <section className="section relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-brand" />
+        <div className="absolute inset-0 bg-dots opacity-20" />
+        <div className="container-wide relative z-10 text-center">
+          <h2 className="text-4xl font-black text-white mb-4 reveal">Станьте нашим<br />довольным пациентом</h2>
+          <p className="text-white/60 mb-8 max-w-md mx-auto reveal delay-100">
+            Запишитесь на приём и убедитесь лично в качестве нашей работы.
+          </p>
+          <PopupButton className="btn-white text-base py-4 px-8 reveal delay-200">
+            Записаться на приём <ArrowRight size={18} />
+          </PopupButton>
         </div>
       </section>
     </div>

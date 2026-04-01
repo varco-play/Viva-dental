@@ -1,39 +1,59 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { CheckCircle, ArrowRight, Info } from 'lucide-react'
 import PopupButton from '@/components/PopupButton'
 import { priceList } from '@/lib/data'
 
 export default function PricesPage() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    )
+    el.querySelectorAll('.reveal').forEach(e => obs.observe(e))
+    return () => obs.disconnect()
+  }, [])
 
   const categories = priceList.map(p => p.category)
-  const filtered = activeCategory
-    ? priceList.filter(p => p.category === activeCategory)
-    : priceList
+  const filtered = activeCategory ? priceList.filter(p => p.category === activeCategory) : priceList
 
   return (
-    <div className="pt-20">
-      {/* Header */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
-        <div className="container-wide">
-          <h1 className="section-title text-4xl md:text-5xl">Прайс-лист</h1>
-          <p className="section-subtitle">
-            Прозрачные цены без скрытых доплат. Точная стоимость определяется после осмотра и составления плана лечения.
+    <div ref={ref}>
+      {/* Hero */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-navy" />
+        <div className="absolute inset-0 bg-dots opacity-30" />
+        <div className="absolute top-10 left-1/3 w-72 h-72 rounded-full bg-teal/10 blur-3xl" />
+        <div className="container-wide relative z-10 text-center">
+          <div className="tag justify-center animate-fade-up"><span className="tag-dot" />Прайс-лист</div>
+          <h1 className="text-5xl md:text-6xl font-black text-white mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+            Прозрачные цены<br /><span className="text-gradient">без скрытых доплат</span>
+          </h1>
+          <p className="text-white/60 text-lg max-w-xl mx-auto mb-8 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+            Точная стоимость определяется после осмотра и составления плана лечения. Первичная консультация — бесплатно.
           </p>
-          <div className="inline-flex items-center gap-2 bg-gold/10 text-gold-dark border border-gold/30 rounded-xl px-4 py-2 text-sm font-medium">
-            ⭐ Первичная консультация — Бесплатно
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-brand/20 border border-green-brand/40 text-green-brand font-semibold text-sm animate-fade-up" style={{ animationDelay: '0.3s' }}>
+            <CheckCircle size={16} />
+            Первичная консультация — Бесплатно
           </div>
         </div>
       </section>
 
-      {/* Filter tabs */}
-      <section className="py-6 bg-white border-b border-gray-100 sticky top-16 z-40">
-        <div className="container-wide">
+      {/* Sticky filter */}
+      <section className="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
+        <div className="container-wide py-4">
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setActiveCategory(null)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                !activeCategory ? 'bg-primary text-white' : 'bg-gray-100 text-muted hover:bg-gray-200'
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                !activeCategory
+                  ? 'bg-gradient-teal text-white shadow-teal'
+                  : 'bg-surface text-muted hover:bg-gray-100'
               }`}
             >
               Все услуги
@@ -42,8 +62,10 @@ export default function PricesPage() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat === activeCategory ? null : cat)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                  activeCategory === cat ? 'bg-primary text-white' : 'bg-gray-100 text-muted hover:bg-gray-200'
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                  activeCategory === cat
+                    ? 'bg-gradient-teal text-white shadow-teal'
+                    : 'bg-surface text-muted hover:bg-gray-100'
                 }`}
               >
                 {cat}
@@ -54,27 +76,30 @@ export default function PricesPage() {
       </section>
 
       {/* Price tables */}
-      <section className="py-10 bg-white">
+      <section className="section bg-surface">
         <div className="container-wide space-y-8">
-          {filtered.map((section) => (
-            <div key={section.category}>
-              <h2 className="text-xl font-bold text-charcoal mb-3 flex items-center gap-2">
-                <span className="w-1 h-6 bg-primary rounded-full inline-block" />
-                {section.category}
-              </h2>
-              <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+          {filtered.map((section, si) => (
+            <div key={section.category} className="reveal" style={{ transitionDelay: `${si * 80}ms` }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-1.5 h-7 rounded-full bg-gradient-teal" />
+                <h2 className="text-xl font-black text-charcoal">{section.category}</h2>
+              </div>
+              <div className="bg-white rounded-2xl overflow-hidden shadow-card border border-gray-50">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-surface">
-                      <th className="text-left px-6 py-3 font-semibold text-charcoal">Услуга</th>
-                      <th className="text-right px-6 py-3 font-semibold text-charcoal whitespace-nowrap">Стоимость</th>
+                    <tr className="bg-navy">
+                      <th className="text-left px-6 py-4 font-semibold text-white/80 text-xs uppercase tracking-wider">Услуга</th>
+                      <th className="text-right px-6 py-4 font-semibold text-white/80 text-xs uppercase tracking-wider whitespace-nowrap">Стоимость</th>
                     </tr>
                   </thead>
                   <tbody>
                     {section.items.map((item, i) => (
-                      <tr key={i} className={`border-t border-gray-50 hover:bg-blue-50/30 transition-colors ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}`}>
-                        <td className="px-6 py-3.5 text-charcoal">{item.name}</td>
-                        <td className="px-6 py-3.5 text-right font-semibold text-primary whitespace-nowrap">{item.price}</td>
+                      <tr
+                        key={i}
+                        className="border-t border-gray-50 hover:bg-surface transition-colors duration-150 group"
+                      >
+                        <td className="px-6 py-4 text-charcoal group-hover:text-navy transition-colors">{item.name}</td>
+                        <td className="px-6 py-4 text-right font-bold text-teal whitespace-nowrap">{item.price}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -85,27 +110,36 @@ export default function PricesPage() {
         </div>
       </section>
 
-      {/* Note */}
-      <section className="py-8 bg-surface">
+      {/* Info note */}
+      <section className="pb-8 bg-surface">
         <div className="container-wide">
-          <div className="bg-blue-50 border border-primary/20 rounded-xl p-6 text-sm text-muted leading-relaxed">
-            <p className="font-semibold text-charcoal mb-2">Важная информация:</p>
-            <ul className="space-y-1 list-disc list-inside">
-              <li>Указанные цены — минимальные. Точная стоимость определяется после осмотра.</li>
-              <li>Первичная консультация — бесплатно.</li>
-              <li>Действуют скидки для пенсионеров и постоянных пациентов.</li>
-              <li>Клиника принимает наличные и банковские карты. Возможна рассрочка.</li>
-            </ul>
+          <div className="bg-white border border-teal/20 rounded-2xl p-6 flex gap-4 shadow-card reveal">
+            <Info size={20} className="text-teal flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="font-bold text-charcoal mb-2 text-sm">Важная информация:</p>
+              <ul className="space-y-1 text-sm text-muted">
+                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Указанные цены — минимальные. Точная стоимость определяется после осмотра.</li>
+                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Первичная консультация — бесплатно.</li>
+                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Действуют скидки для пенсионеров и постоянных пациентов.</li>
+                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Доступна рассрочка без переплат 0%.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-14 bg-white border-t border-gray-100">
-        <div className="container-wide text-center">
-          <h2 className="text-3xl font-bold text-charcoal mb-4">Узнайте точную стоимость лечения</h2>
-          <p className="text-muted mb-8 max-w-md mx-auto">Запишитесь на бесплатный осмотр — составим точный план и смету без скрытых доплат.</p>
-          <PopupButton label="Записаться бесплатно" variant="primary" className="text-base py-3.5 px-8" />
+      <section className="section relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-brand" />
+        <div className="absolute inset-0 bg-dots opacity-20" />
+        <div className="container-wide relative z-10 text-center">
+          <h2 className="text-4xl font-black text-white mb-4 reveal">Узнайте точную стоимость лечения</h2>
+          <p className="text-white/60 mb-8 max-w-md mx-auto reveal delay-100">
+            Запишитесь на бесплатный осмотр — составим точный план и смету без скрытых доплат.
+          </p>
+          <PopupButton className="btn-white text-base py-4 px-8 reveal delay-200">
+            Записаться бесплатно <ArrowRight size={18} />
+          </PopupButton>
         </div>
       </section>
     </div>
