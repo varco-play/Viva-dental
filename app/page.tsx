@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Shield, Clock, Award, Star, ChevronRight, Phone, Calendar, Users, Stethoscope, Sparkles, CheckCircle } from 'lucide-react'
+import { ArrowRight, Shield, Clock, Award, Star, ChevronRight, Phone, Calendar, Users, Stethoscope, Sparkles, CheckCircle, Smile, Scissors, MinusCircle, Wind, Syringe, MessageSquare, type LucideIcon } from 'lucide-react'
 import PopupButton from '@/components/PopupButton'
 
 function Counter({ end, suffix = '', duration = 2000 }: { end: number; suffix?: string; duration?: number }) {
@@ -45,13 +45,13 @@ const features = [
   { icon: Sparkles, title: 'Безболезненно', desc: 'Современные анестетики делают лечение комфортным даже для детей.' },
 ]
 
-const serviceCards = [
-  { title: 'Терапия', desc: 'Лечение кариеса, реставрация зубов', emoji: '🦷' },
-  { title: 'Ортодонтия', desc: 'Брекеты, элайнеры, ретейнеры', emoji: '😁' },
-  { title: 'Имплантация', desc: 'Металлокерамика и цирконий', emoji: '🔬' },
-  { title: 'Косметическая', desc: 'Отбеливание и виниры', emoji: '✨' },
-  { title: 'Хирургия', desc: 'Удаление, сложные операции', emoji: '🏥' },
-  { title: 'Детская', desc: 'Бережное лечение от 3 лет', emoji: '👶' },
+const serviceCards: { title: string; desc: string; Icon: LucideIcon }[] = [
+  { title: 'Лечение кариеса', desc: 'Пломба под цвет зуба без боли', Icon: Smile },
+  { title: 'Удаление зубов', desc: 'Простые и сложные удаления', Icon: Scissors },
+  { title: 'Удаление зубов мудрости', desc: 'Безопасное удаление восьмёрок', Icon: MinusCircle },
+  { title: 'Профессиональная чистка', desc: 'AirFlow и ультразвуковая чистка', Icon: Wind },
+  { title: 'Пульпа девитализация', desc: 'Лечение нерва зуба', Icon: Syringe },
+  { title: 'Консультации', desc: 'Ортодонт и ортопед', Icon: MessageSquare },
 ]
 
 const testimonials = [
@@ -107,7 +107,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="flex flex-wrap gap-5 mt-10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
-              {['Лицензия МЗ РФ', 'Гарантия до 5 лет', 'Рассрочка 0%'].map((b) => (
+              {['Лицензия МЗ РУз', 'Гарантия на лечение', 'Скидка 10% семьям'].map((b) => (
                 <div key={b} className="flex items-center gap-1.5 text-white/60 text-sm">
                   <CheckCircle size={14} className="text-green-brand flex-shrink-0" />
                   {b}
@@ -196,7 +196,9 @@ export default function HomePage() {
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-surface rounded-full -translate-y-8 translate-x-8 group-hover:scale-150 transition-transform duration-500" />
                 <div className="relative">
-                  <span className="text-4xl mb-4 block">{s.emoji}</span>
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <s.Icon size={22} className="text-white" />
+                  </div>
                   <h3 className="font-bold text-charcoal text-lg mb-1 group-hover:text-teal transition-colors">{s.title}</h3>
                   <p className="text-muted text-sm mb-3">{s.desc}</p>
                   <span className="inline-flex items-center gap-1 text-teal text-sm font-semibold">
@@ -217,24 +219,25 @@ export default function HomePage() {
         <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-white/5 blur-3xl" />
         <div className="container-wide relative z-10 text-center">
           <div className="reveal">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
-              🎉 Первичная консультация бесплатно
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
+              <Star size={14} className="text-yellow-400 fill-yellow-400" />
+              10% скидка при семейном посещении
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6 reveal delay-100">
             Начните путь к идеальной<br />улыбке сегодня
           </h2>
           <p className="text-white/70 text-lg mb-10 max-w-xl mx-auto reveal delay-200">
-            Запишитесь прямо сейчас и получите бесплатную консультацию.
+            Запишитесь прямо сейчас и получите профессиональную помощь.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center reveal delay-300">
             <PopupButton className="btn-white text-base py-4 px-8">
               <Calendar size={18} />
               Записаться онлайн
             </PopupButton>
-            <a href="tel:+74951234567" className="inline-flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-navy transition-all duration-300 text-base">
+            <a href="tel:+998711234567" className="inline-flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-navy transition-all duration-300 text-base">
               <Phone size={18} />
-              +7 (495) 123-45-67
+              +998 (71) 123-45-67
             </a>
           </div>
         </div>

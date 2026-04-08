@@ -1,8 +1,25 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { ArrowRight, CheckCircle } from 'lucide-react'
+import {
+  ArrowRight, CheckCircle, Smile, Syringe, AlertCircle, RotateCcw,
+  Scissors, MinusCircle, Baby, Wind, Zap, ClipboardList, Clipboard,
+} from 'lucide-react'
 import PopupButton from '@/components/PopupButton'
 import { services } from '@/lib/data'
+
+const serviceIcons: Record<string, React.ElementType> = {
+  'Лечение кариеса': Smile,
+  'Пульпа девитализация': Syringe,
+  'Отток корневых каналов': AlertCircle,
+  'Реэндо (перелечивание каналов)': RotateCcw,
+  'Удаление зуба': Scissors,
+  'Удаление зубов мудрости': MinusCircle,
+  'Удаление детских зубов': Baby,
+  'Профессиональная чистка (AirFlow)': Wind,
+  'Профессиональная чистка (ультразвук) и полировка': Zap,
+  'Консультация врача ортодонта': ClipboardList,
+  'Консультация ортопеда': Clipboard,
+}
 
 export default function ServicesPage() {
   const ref = useRef<HTMLDivElement>(null)
@@ -38,46 +55,43 @@ export default function ServicesPage() {
       {/* Services Grid */}
       <section className="section bg-surface">
         <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
             {services.map((service, i) => (
               <div
-                key={service.category}
+                key={service.name}
                 className="reveal reveal-scale group bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-400 hover:-translate-y-1"
-                style={{ transitionDelay: `${i * 80}ms` }}
+                style={{ transitionDelay: `${i * 60}ms` }}
               >
                 {/* Card header */}
-                <div className="relative p-8 pb-6">
-                  <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-surface -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500" />
-                  <div className="relative flex items-start gap-5">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-teal flex items-center justify-center flex-shrink-0 shadow-teal group-hover:scale-110 transition-transform duration-300">
-                      <span className="text-2xl">{service.icon || '🦷'}</span>
+                <div className="relative p-7 pb-5">
+                  <div className="absolute top-0 right-0 w-36 h-36 rounded-full bg-surface -translate-y-14 translate-x-14 group-hover:scale-150 transition-transform duration-500" />
+                  <div className="relative flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-teal flex items-center justify-center flex-shrink-0 shadow-teal group-hover:scale-110 transition-transform duration-300">
+                      {(() => { const Icon = serviceIcons[service.name]; return Icon ? <Icon size={20} className="text-white" /> : null })()}
                     </div>
                     <div className="flex-1">
-                      <h2 className="text-xl font-black text-charcoal mb-1 group-hover:text-teal transition-colors">{service.category}</h2>
+                      <h2 className="text-lg font-black text-charcoal mb-1 group-hover:text-teal transition-colors leading-tight">{service.name}</h2>
                     </div>
                   </div>
                 </div>
 
-                {/* Items */}
-                {service.items && service.items.length > 0 && (
-                  <div className="px-8 pb-8">
-                    <div className="h-px bg-gray-50 mb-5" />
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {service.items.slice(0, 6).map((feat: string) => (
-                        <li key={feat} className="flex items-start gap-2 text-sm text-muted">
-                          <CheckCircle size={14} className="text-teal mt-0.5 flex-shrink-0" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
+                {/* Description + highlights */}
+                <div className="px-7 pb-7">
+                  <p className="text-sm text-muted mb-4 leading-relaxed">{service.description}</p>
+                  <div className="h-px bg-gray-50 mb-4" />
+                  <ul className="space-y-1.5">
+                    {service.highlights.map((h: string) => (
+                      <li key={h} className="flex items-start gap-2 text-sm text-muted">
+                        <CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-5">
+                    <PopupButton className="btn-outline text-sm py-2.5 px-5 w-full justify-center group-hover:bg-teal group-hover:text-white group-hover:border-teal">
+                      Записаться <ArrowRight size={14} />
+                    </PopupButton>
                   </div>
-                )}
-
-                {/* CTA */}
-                <div className="px-8 pb-8 pt-0">
-                  <PopupButton className="btn-outline text-sm py-2.5 px-5 w-full sm:w-auto justify-center group-hover:bg-teal group-hover:text-white group-hover:border-teal">
-                    Записаться <ArrowRight size={14} />
-                  </PopupButton>
                 </div>
               </div>
             ))}

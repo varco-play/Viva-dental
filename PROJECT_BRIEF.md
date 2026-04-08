@@ -53,3 +53,7 @@ Leave blank — client fills in.
 
 ## Logo
 To be added by client. Placeholder text "Viva Dental" used in navbar.
+
+
+## Deploy
+After some changes, always ask me whether you are good to push all the changes into my repo or not yet. If i say no, then we will just keep working and at the end of the project you need to git add . and then commit it, finally push it all to the main branch

@@ -30,7 +30,7 @@ export default function DoctorsPage() {
             Врачи, которым<br /><span className="text-gradient">доверяют пациенты</span>
           </h1>
           <p className="text-white/60 text-lg max-w-xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Наши специалисты — это кандидаты наук, победители всероссийских конкурсов, практикующие эксперты с многолетним опытом.
+            Наши специалисты — практикующие эксперты с многолетним опытом и международными сертификатами.
           </p>
         </div>
       </section>

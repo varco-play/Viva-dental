@@ -35,11 +35,11 @@ export default function PricesPage() {
             Прозрачные цены<br /><span className="text-gradient">без скрытых доплат</span>
           </h1>
           <p className="text-white/60 text-lg max-w-xl mx-auto mb-8 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Точная стоимость определяется после осмотра и составления плана лечения. Первичная консультация — бесплатно.
+            Точная стоимость определяется после осмотра и составления плана лечения.
           </p>
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-brand/20 border border-green-brand/40 text-green-brand font-semibold text-sm animate-fade-up" style={{ animationDelay: '0.3s' }}>
             <CheckCircle size={16} />
-            Первичная консультация — Бесплатно
+            10% скидка при семейном посещении
           </div>
         </div>
       </section>
@@ -119,9 +119,9 @@ export default function PricesPage() {
               <p className="font-bold text-charcoal mb-2 text-sm">Важная информация:</p>
               <ul className="space-y-1 text-sm text-muted">
                 <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Указанные цены — минимальные. Точная стоимость определяется после осмотра.</li>
-                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Первичная консультация — бесплатно.</li>
-                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Действуют скидки для пенсионеров и постоянных пациентов.</li>
-                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Доступна рассрочка без переплат 0%.</li>
+                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />10% скидка при семейном посещении.</li>
+                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Скидка при лечении 2 и более зубов.</li>
+                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Цены указаны в узбекских сумах (UZS).</li>
               </ul>
             </div>
           </div>
@@ -135,10 +135,10 @@ export default function PricesPage() {
         <div className="container-wide relative z-10 text-center">
           <h2 className="text-4xl font-black text-white mb-4 reveal">Узнайте точную стоимость лечения</h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto reveal delay-100">
-            Запишитесь на бесплатный осмотр — составим точный план и смету без скрытых доплат.
+            Запишитесь на приём — составим точный план и смету без скрытых доплат.
           </p>
           <PopupButton className="btn-white text-base py-4 px-8 reveal delay-200">
-            Записаться бесплатно <ArrowRight size={18} />
+            Записаться на приём <ArrowRight size={18} />
           </PopupButton>
         </div>
       </section>

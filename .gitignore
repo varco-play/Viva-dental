@@ -3,3 +3,7 @@ node_modules/
 .env.local
 .env
 *.tsbuildinfo
+.DS_Store
+.claude/
+*.pages
+ЗАПРОС_КОНТЕНТА.md

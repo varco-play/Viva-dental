@@ -7,23 +7,23 @@ const contactCards = [
   {
     icon: Phone,
     title: 'Телефон',
-    value: '+7 (495) 123-45-67',
+    value: '+998 (71) 123-45-67',
     sub: 'Пн–Вс: 9:00–21:00',
-    href: 'tel:+74951234567',
+    href: 'tel:+998711234567',
     color: 'bg-teal',
   },
   {
     icon: Mail,
     title: 'Email',
-    value: 'info@vivadental.ru',
+    value: 'info@vivadental.uz',
     sub: 'Ответим в течение часа',
-    href: 'mailto:info@vivadental.ru',
+    href: 'mailto:info@vivadental.uz',
     color: 'bg-navy',
   },
   {
     icon: MessageCircle,
     title: 'WhatsApp / Telegram',
-    value: '+7 (495) 123-45-67',
+    value: '+998 (71) 123-45-67',
     sub: 'Пишите в любое время',
     href: '#',
     color: 'bg-green-brand',
@@ -104,8 +104,8 @@ export default function ContactsPage() {
                 <div className="absolute inset-0 bg-dots" />
                 <div className="relative text-center text-muted">
                   <MapPin size={48} className="mx-auto mb-3 text-teal/40" />
-                  <div className="font-semibold text-charcoal">г. Москва, ул. Примерная, д. 1</div>
-                  <div className="text-sm mt-1">м. Площадь революции</div>
+                  <div className="font-semibold text-charcoal">г. Ташкент, ул. Амира Темура, д. 1</div>
+                  <div className="text-sm mt-1">м. Амира Темура</div>
                   <a
                     href="https://maps.google.com"
                     target="_blank"
@@ -128,9 +128,9 @@ export default function ContactsPage() {
                   </div>
                   <h3 className="font-bold text-charcoal">Адрес</h3>
                 </div>
-                <p className="text-muted text-sm pl-10">г. Москва, ул. Примерная, д. 1, этаж 2</p>
+                <p className="text-muted text-sm pl-10">г. Ташкент, ул. Амира Темура, д. 1, этаж 2</p>
                 <p className="text-muted text-sm pl-10 mt-1">
-                  <span className="font-medium text-charcoal">Метро:</span> Площадь Революции (5 мин пешком)
+                  <span className="font-medium text-charcoal">Метро:</span> м. Амира Темура (5 мин пешком)
                 </p>
                 <p className="text-muted text-sm pl-10 mt-1">
                   <span className="font-medium text-charcoal">Парковка:</span> Бесплатная во дворе здания
@@ -158,13 +158,13 @@ export default function ContactsPage() {
               {/* CTA */}
               <div className="bg-surface rounded-2xl p-5">
                 <div className="font-bold text-charcoal mb-1">Запишитесь прямо сейчас</div>
-                <p className="text-muted text-sm mb-4">Первичная консультация — бесплатно. Перезвоним в удобное вам время.</p>
+                <p className="text-muted text-sm mb-4">Оставьте заявку — перезвоним и подберём удобное для вас время.</p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <PopupButton className="btn-primary text-sm py-2.5 flex-1 justify-center">
                     <Send size={15} />
                     Записаться онлайн
                   </PopupButton>
-                  <a href="tel:+74951234567" className="btn-outline text-sm py-2.5 flex-1 justify-center">
+                  <a href="tel:+998711234567" className="btn-outline text-sm py-2.5 flex-1 justify-center">
                     <Phone size={15} />
                     Позвонить
                   </a>

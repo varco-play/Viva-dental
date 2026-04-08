@@ -1,13 +1,13 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { Star, ThumbsUp, ArrowRight } from 'lucide-react'
+import { Star, ThumbsUp, ArrowRight, BookOpen } from 'lucide-react'
 import PopupButton from '@/components/PopupButton'
 import { reviews } from '@/lib/data'
 
 const blogPosts = [
-  { title: 'Имплантация зубов: всё что нужно знать', date: '15 марта 2025', category: 'Имплантация', readTime: '5 мин' },
-  { title: 'Брекеты или элайнеры: что выбрать?', date: '2 марта 2025', category: 'Ортодонтия', readTime: '4 мин' },
-  { title: 'Как сохранить белизну зубов после отбеливания', date: '18 февраля 2025', category: 'Эстетика', readTime: '3 мин' },
+  { title: 'Лечение кариеса: как не довести до удаления', date: '15 марта 2025', category: 'Терапия', readTime: '5 мин' },
+  { title: 'Зубы мудрости: удалять или оставить?', date: '2 марта 2025', category: 'Хирургия', readTime: '4 мин' },
+  { title: 'Профессиональная чистка: зачем и как часто', date: '18 февраля 2025', category: 'Гигиена', readTime: '3 мин' },
 ]
 
 export default function ReviewsPage() {
@@ -48,7 +48,7 @@ export default function ReviewsPage() {
             <div className="text-left">
               <div className="text-white/70 text-sm">На основе</div>
               <div className="text-2xl font-black text-white">2000+ отзывов</div>
-              <div className="text-white/40 text-sm">Google · Яндекс · ПроДокторов</div>
+              <div className="text-white/40 text-sm">Google · Yandex · 2GIS</div>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function ReviewsPage() {
                   {/* Placeholder image */}
                   <div className="h-40 rounded-xl bg-gradient-to-br from-navy to-teal-dark flex items-center justify-center relative overflow-hidden">
                     <div className="absolute inset-0 bg-dots opacity-30" />
-                    <span className="text-3xl relative z-10">📝</span>
+                    <BookOpen size={36} className="relative z-10 text-teal/60" />
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="px-2.5 py-1 rounded-full bg-teal/10 text-teal text-xs font-semibold">{post.category}</span>

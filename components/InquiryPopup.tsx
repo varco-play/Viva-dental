@@ -146,7 +146,7 @@ export default function InquiryPopup() {
                     value={form.phone}
                     onChange={handleChange}
                     required
-                    placeholder="+7 (___) ___-__-__ *"
+                    placeholder="+998 (__) ___-__-__ *"
                     className={inputClass}
                   />
                 </div>

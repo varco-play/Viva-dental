@@ -11,8 +11,8 @@ const navLinks = [
 ]
 
 const serviceLinks = [
-  'Терапия', 'Ортодонтия', 'Имплантация',
-  'Протезирование', 'Хирургия', 'Детская стоматология',
+  'Лечение кариеса', 'Пульпа девитализация', 'Удаление зубов',
+  'Профессиональная чистка', 'Реэндо', 'Консультации',
 ]
 
 export default function Footer() {
@@ -46,7 +46,7 @@ export default function Footer() {
             </p>
             {/* Social */}
             <div className="flex gap-3">
-              {['ВК', 'TG', 'WA'].map((s) => (
+              {['IG', 'TG', 'WA'].map((s) => (
                 <a
                   key={s}
                   href="#"
@@ -102,22 +102,22 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <MapPin size={14} className="text-teal" />
                 </div>
-                <span className="text-sm">г. Москва, ул. Примерная, д. 1</span>
+                <span className="text-sm">г. Ташкент, ул. Амира Темура, д. 1</span>
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
                   <Phone size={14} className="text-teal" />
                 </div>
-                <a href="tel:+74951234567" className="text-sm hover:text-teal transition-colors">
-                  +7 (495) 123-45-67
+                <a href="tel:+998711234567" className="text-sm hover:text-teal transition-colors">
+                  +998 (71) 123-45-67
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
                   <Mail size={14} className="text-teal" />
                 </div>
-                <a href="mailto:info@vivadental.ru" className="text-sm hover:text-teal transition-colors">
-                  info@vivadental.ru
+                <a href="mailto:info@vivadental.uz" className="text-sm hover:text-teal transition-colors">
+                  info@vivadental.uz
                 </a>
               </li>
               <li className="flex items-start gap-3">
@@ -138,7 +138,7 @@ export default function Footer() {
       <div className="border-t border-white/5 relative z-10">
         <div className="container-wide py-5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/30">
           <span>© 2025 Viva Dental Group. Все права защищены.</span>
-          <span>Лицензия ЛО-77-01-XXXXXXX</span>
+          <span>Лицензия МЗ РУз № XXXXXXXX</span>
         </div>
       </div>
     </footer>

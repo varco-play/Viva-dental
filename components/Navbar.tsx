@@ -63,11 +63,11 @@ export default function Navbar() {
             <div className="container-wide flex justify-between items-center">
               <span className="hidden sm:block">Пн–Сб: 9:00–21:00 &nbsp;|&nbsp; Вс: 10:00–18:00</span>
               <a
-                href="tel:+74951234567"
+                href="tel:+998711234567"
                 className="flex items-center gap-1.5 hover:text-teal transition-colors ml-auto"
               >
                 <Phone size={12} />
-                <span>+7 (495) 123-45-67</span>
+                <span>+998 (71) 123-45-67</span>
               </a>
             </div>
           </div>
@@ -119,13 +119,13 @@ export default function Navbar() {
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="tel:+74951234567"
+              href="tel:+998711234567"
               className={`flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 ${
                 scrolled ? 'text-charcoal hover:text-teal' : 'text-white/80 hover:text-white'
               }`}
             >
               <Phone size={14} />
-              <span className="hidden xl:block">+7 (495) 123-45-67</span>
+              <span className="hidden xl:block">+998 (71) 123-45-67</span>
             </a>
             <button
               onClick={openPopup}
@@ -162,7 +162,7 @@ export default function Navbar() {
             <div className="container-wide py-4">
               {/* Phone */}
               <a
-                href="tel:+74951234567"
+                href="tel:+998711234567"
                 className="flex items-center gap-3 py-3 px-4 rounded-xl bg-surface mb-3 text-charcoal"
               >
                 <div className="w-8 h-8 rounded-full bg-gradient-teal flex items-center justify-center flex-shrink-0">
@@ -170,7 +170,7 @@ export default function Navbar() {
                 </div>
                 <div>
                   <div className="text-xs text-muted">Позвонить нам</div>
-                  <div className="font-semibold text-sm">+7 (495) 123-45-67</div>
+                  <div className="font-semibold text-sm">+998 (71) 123-45-67</div>
                 </div>
               </a>
 

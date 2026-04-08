@@ -11,9 +11,9 @@ const values = [
 ]
 
 const achievements = [
-  'Лицензия Министерства здравоохранения РФ',
+  'Лицензия Министерства здравоохранения Республики Узбекистан',
   'Сертификаты ISO 9001:2015',
-  'Партнёр ведущих стоматологических академий России',
+  'Партнёр ведущих стоматологических академий Узбекистана',
   'Победитель премии «Лучшая клиника года» 2022, 2023',
   'Более 50 дипломов и сертификатов врачей',
   'Современное оборудование Planmeca и Sirona',
@@ -159,10 +159,10 @@ export default function AboutPage() {
         <div className="container-wide relative z-10 text-center">
           <h2 className="text-4xl font-black text-white mb-4 reveal">Убедитесь сами</h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto reveal delay-100">
-            Запишитесь на бесплатную консультацию и познакомьтесь с нашей командой лично.
+            Запишитесь на консультацию и познакомьтесь с нашей командой лично.
           </p>
           <PopupButton className="btn-white text-base py-4 px-8 reveal delay-200">
-            Записаться бесплатно
+            Записаться на приём
           </PopupButton>
         </div>
       </section>
