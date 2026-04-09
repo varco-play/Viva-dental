@@ -74,9 +74,20 @@ function TypingDots() {
   )
 }
 
+// ─── Strip markdown so **bold** and * bullets don't show as raw symbols ────
+function cleanMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '$1')   // **bold** → bold
+    .replace(/\*(.*?)\*/g, '$1')        // *italic* → italic
+    .replace(/^[\s]*\*[\s]+/gm, '• ')  // * bullet → • bullet
+    .replace(/^[\s]*-[\s]+/gm, '• ')   // - bullet → • bullet
+    .trim()
+}
+
 // ─── Message Bubble ────────────────────────────────────────────────────────
 function MessageBubble({ msg }: { msg: Message }) {
   const isUser = msg.role === 'user'
+  const text = isUser ? msg.content : cleanMarkdown(msg.content)
   return (
     <div
       style={{
@@ -122,7 +133,7 @@ function MessageBubble({ msg }: { msg: Message }) {
           wordBreak: 'break-word',
         }}
       >
-        {msg.content}
+        {text}
       </div>
       {isUser && (
         <div
