@@ -1,91 +1,241 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { MessageCircle, X, Send, Loader2, Bot, User } from 'lucide-react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { MessageCircle, X, Send, Bot, User, Phone } from 'lucide-react'
 
+// ─── Types ─────────────────────────────────────────────────────────────────
 interface Message {
   role: 'user' | 'assistant'
   content: string
 }
 
-const WELCOME_MESSAGE: Message = {
+// ─── Constants ─────────────────────────────────────────────────────────────
+const WELCOME: Message = {
   role: 'assistant',
   content:
-    'Добрый день! 👋 Я виртуальный ассистент клиники Viva Dental. Могу рассказать об услугах, ценах, врачах или помочь записаться на приём. Чем могу помочь?',
+    'Добрый день! Я виртуальный ассистент клиники Viva Dental. Могу рассказать об услугах, ценах, врачах или помочь записаться на приём. Чем могу помочь?',
 }
 
+const QUICK_SUGGESTIONS = [
+  'Цены на услуги',
+  'Записаться на приём',
+  'Режим работы',
+  'Удаление зуба мудрости',
+]
+
+// ─── Typing Dots Component ─────────────────────────────────────────────────
+function TypingDots() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.5rem' }}>
+      {/* Bot avatar */}
+      <div
+        style={{
+          width: 28,
+          height: 28,
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, #4A90D9, #2dc653)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
+      >
+        <Bot size={14} color="#fff" />
+      </div>
+      {/* Animated dots bubble */}
+      <div
+        style={{
+          padding: '0.65rem 1rem',
+          borderRadius: '1rem 1rem 1rem 0.25rem',
+          background: '#fff',
+          border: '1px solid rgba(74,144,217,0.12)',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 5,
+        }}
+      >
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            style={{
+              width: 7,
+              height: 7,
+              borderRadius: '50%',
+              background: '#4A90D9',
+              display: 'inline-block',
+              animation: `chatDotBounce 1.2s ease-in-out ${i * 0.2}s infinite`,
+              opacity: 0.7,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ─── Message Bubble ────────────────────────────────────────────────────────
+function MessageBubble({ msg }: { msg: Message }) {
+  const isUser = msg.role === 'user'
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: isUser ? 'flex-end' : 'flex-start',
+        gap: '0.5rem',
+        alignItems: 'flex-end',
+      }}
+    >
+      {!isUser && (
+        <div
+          style={{
+            width: 28,
+            height: 28,
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #4A90D9, #2dc653)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            marginBottom: 2,
+          }}
+        >
+          <Bot size={14} color="#fff" />
+        </div>
+      )}
+      <div
+        style={{
+          maxWidth: '78%',
+          padding: '0.6rem 0.9rem',
+          borderRadius: isUser
+            ? '1rem 1rem 0.25rem 1rem'
+            : '1rem 1rem 1rem 0.25rem',
+          background: isUser
+            ? 'linear-gradient(135deg, #4A90D9, #357ABD)'
+            : '#fff',
+          color: isUser ? '#fff' : '#1A1A2E',
+          fontSize: '0.82rem',
+          lineHeight: 1.55,
+          boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
+          border: !isUser ? '1px solid rgba(74,144,217,0.12)' : 'none',
+          whiteSpace: 'pre-wrap',
+          wordBreak: 'break-word',
+        }}
+      >
+        {msg.content}
+      </div>
+      {isUser && (
+        <div
+          style={{
+            width: 28,
+            height: 28,
+            borderRadius: '50%',
+            background: '#E8EFF7',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            marginBottom: 2,
+          }}
+        >
+          <User size={14} color="#4A90D9" />
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Main Widget ───────────────────────────────────────────────────────────
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE])
+  const [messages, setMessages] = useState<Message[]>([WELCOME])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // Scroll to bottom on new message
+  // Scroll to bottom whenever messages or loading state changes
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, loading])
 
   // Focus input when chat opens
   useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 100)
-    }
+    if (isOpen) setTimeout(() => inputRef.current?.focus(), 150)
   }, [isOpen])
 
-  const sendMessage = async () => {
-    const text = input.trim()
-    if (!text || loading) return
+  // ─── Core send function ─────────────────────────────────────────────────
+  const sendMessage = useCallback(
+    async (text: string) => {
+      const trimmed = text.trim()
+      if (!trimmed || loading) return
 
-    const userMessage: Message = { role: 'user', content: text }
-    const newMessages = [...messages, userMessage]
-    setMessages(newMessages)
-    setInput('')
-    setLoading(true)
-    setError(null)
+      const userMsg: Message = { role: 'user', content: trimmed }
 
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: newMessages.filter((m) => m.role !== 'assistant' || m !== WELCOME_MESSAGE),
-        }),
-      })
+      // Optimistically add user message
+      setMessages((prev) => [...prev, userMsg])
+      setInput('')
+      setLoading(true)
+      setErrorMsg(null)
 
-      const data = await res.json()
+      try {
+        // Build the history to send — include everything so far + new user msg
+        const history = [...messages, userMsg]
 
-      if (!res.ok) {
-        throw new Error(data.error || 'Ошибка сервера')
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history }),
+        })
+
+        const data = await res.json()
+
+        // API returned an error field (our own structured errors)
+        if (data.error) {
+          setErrorMsg(data.error)
+          return
+        }
+
+        if (!res.ok || !data.message) {
+          setErrorMsg('Не удалось получить ответ. Позвоните нам: +998 (71) 123-45-67')
+          return
+        }
+
+        setMessages((prev) => [
+          ...prev,
+          { role: 'assistant', content: data.message },
+        ])
+      } catch {
+        setErrorMsg(
+          'Нет соединения. Проверьте интернет или позвоните: +998 (71) 123-45-67'
+        )
+      } finally {
+        setLoading(false)
       }
+    },
+    [loading, messages]
+  )
 
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: data.message },
-      ])
-    } catch {
-      setError('Не удалось получить ответ. Попробуйте ещё раз или позвоните нам.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      sendMessage()
+      sendMessage(input)
     }
   }
+
+  const showSuggestions = messages.length === 1 && !loading
 
   return (
     <>
-      {/* Chat window */}
+      {/* ── Chat window ───────────────────────────────────────────────── */}
       {isOpen && (
         <div
-          className="fixed bottom-24 right-4 z-50 flex flex-col"
           style={{
+            position: 'fixed',
+            bottom: '5.5rem',
+            right: '1.5rem',
+            zIndex: 50,
             width: 'min(380px, calc(100vw - 2rem))',
             height: 'min(560px, calc(100vh - 8rem))',
             borderRadius: '1.25rem',
@@ -93,6 +243,8 @@ export default function ChatWidget() {
             background: '#fff',
             border: '1px solid rgba(74,144,217,0.15)',
             overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           {/* Header */}
@@ -121,14 +273,50 @@ export default function ChatWidget() {
               <Bot size={20} color="#fff" />
             </div>
             <div style={{ flex: 1 }}>
-              <div style={{ color: '#fff', fontWeight: 700, fontSize: '0.9rem', lineHeight: 1.2 }}>
+              <div
+                style={{
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  lineHeight: 1.2,
+                }}
+              >
                 Viva Dental
               </div>
-              <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.72rem', display: 'flex', alignItems: 'center', gap: 4 }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#2dc653', display: 'inline-block' }} />
+              <div
+                style={{
+                  color: 'rgba(255,255,255,0.55)',
+                  fontSize: '0.72rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                }}
+              >
+                <span
+                  style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: '50%',
+                    background: '#2dc653',
+                    display: 'inline-block',
+                  }}
+                />
                 Онлайн-ассистент
               </div>
             </div>
+            {/* Phone shortcut */}
+            <a
+              href="tel:+998711234567"
+              title="Позвонить"
+              style={{
+                color: 'rgba(255,255,255,0.6)',
+                display: 'flex',
+                alignItems: 'center',
+                marginRight: 4,
+              }}
+            >
+              <Phone size={16} />
+            </a>
             <button
               onClick={() => setIsOpen(false)}
               style={{
@@ -137,11 +325,8 @@ export default function ChatWidget() {
                 border: 'none',
                 cursor: 'pointer',
                 padding: 4,
-                borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'color 0.2s',
               }}
               aria-label="Закрыть"
             >
@@ -149,7 +334,7 @@ export default function ChatWidget() {
             </button>
           </div>
 
-          {/* Messages */}
+          {/* Messages area */}
           <div
             style={{
               flex: 1,
@@ -162,114 +347,14 @@ export default function ChatWidget() {
             }}
           >
             {messages.map((msg, i) => (
-              <div
-                key={i}
-                style={{
-                  display: 'flex',
-                  justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                  gap: '0.5rem',
-                  alignItems: 'flex-end',
-                }}
-              >
-                {msg.role === 'assistant' && (
-                  <div
-                    style={{
-                      width: 28,
-                      height: 28,
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #4A90D9, #2dc653)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      marginBottom: 2,
-                    }}
-                  >
-                    <Bot size={14} color="#fff" />
-                  </div>
-                )}
-                <div
-                  style={{
-                    maxWidth: '78%',
-                    padding: '0.6rem 0.9rem',
-                    borderRadius:
-                      msg.role === 'user'
-                        ? '1rem 1rem 0.25rem 1rem'
-                        : '1rem 1rem 1rem 0.25rem',
-                    background:
-                      msg.role === 'user'
-                        ? 'linear-gradient(135deg, #4A90D9, #357ABD)'
-                        : '#fff',
-                    color: msg.role === 'user' ? '#fff' : '#1A1A2E',
-                    fontSize: '0.82rem',
-                    lineHeight: 1.55,
-                    boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
-                    border: msg.role === 'assistant' ? '1px solid rgba(74,144,217,0.12)' : 'none',
-                    whiteSpace: 'pre-wrap',
-                    wordBreak: 'break-word',
-                  }}
-                >
-                  {msg.content}
-                </div>
-                {msg.role === 'user' && (
-                  <div
-                    style={{
-                      width: 28,
-                      height: 28,
-                      borderRadius: '50%',
-                      background: '#E8EFF7',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      marginBottom: 2,
-                    }}
-                  >
-                    <User size={14} color="#4A90D9" />
-                  </div>
-                )}
-              </div>
+              <MessageBubble key={i} msg={msg} />
             ))}
 
-            {/* Loading indicator */}
-            {loading && (
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.5rem' }}>
-                <div
-                  style={{
-                    width: 28,
-                    height: 28,
-                    borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #4A90D9, #2dc653)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}
-                >
-                  <Bot size={14} color="#fff" />
-                </div>
-                <div
-                  style={{
-                    padding: '0.6rem 0.9rem',
-                    borderRadius: '1rem 1rem 1rem 0.25rem',
-                    background: '#fff',
-                    border: '1px solid rgba(74,144,217,0.12)',
-                    boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    color: '#6B7280',
-                    fontSize: '0.8rem',
-                  }}
-                >
-                  <Loader2 size={13} style={{ animation: 'spin 1s linear infinite' }} />
-                  Печатает...
-                </div>
-              </div>
-            )}
+            {/* Animated typing dots while waiting */}
+            {loading && <TypingDots />}
 
-            {/* Error */}
-            {error && (
+            {/* Error message */}
+            {errorMsg && !loading && (
               <div
                 style={{
                   background: '#FEF2F2',
@@ -278,17 +363,18 @@ export default function ChatWidget() {
                   padding: '0.6rem 0.9rem',
                   color: '#DC2626',
                   fontSize: '0.78rem',
+                  lineHeight: 1.5,
                 }}
               >
-                {error}
+                {errorMsg}
               </div>
             )}
 
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick suggestions — show only on first message */}
-          {messages.length === 1 && (
+          {/* Quick suggestion chips — only before first user message */}
+          {showSuggestions && (
             <div
               style={{
                 padding: '0 1rem 0.75rem',
@@ -298,28 +384,10 @@ export default function ChatWidget() {
                 background: '#F8F9FC',
               }}
             >
-              {['Цены на услуги', 'Записаться на приём', 'Режим работы', 'Удаление зуба мудрости'].map((q) => (
+              {QUICK_SUGGESTIONS.map((q) => (
                 <button
                   key={q}
-                  onClick={() => {
-                    setInput(q)
-                    setTimeout(() => sendMessage(), 0)
-                    setMessages((prev) => [...prev, { role: 'user', content: q }])
-                    setInput('')
-                    setLoading(true)
-                    setError(null)
-                    fetch('/api/chat', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ messages: [...messages, { role: 'user', content: q }] }),
-                    })
-                      .then((r) => r.json())
-                      .then((data) => {
-                        setMessages((prev) => [...prev, { role: 'assistant', content: data.message }])
-                      })
-                      .catch(() => setError('Не удалось получить ответ.'))
-                      .finally(() => setLoading(false))
-                  }}
+                  onClick={() => sendMessage(q)}
                   style={{
                     padding: '0.35rem 0.75rem',
                     borderRadius: '999px',
@@ -329,7 +397,6 @@ export default function ChatWidget() {
                     fontSize: '0.75rem',
                     fontWeight: 600,
                     cursor: 'pointer',
-                    transition: 'all 0.15s',
                   }}
                 >
                   {q}
@@ -366,39 +433,49 @@ export default function ChatWidget() {
                 outline: 'none',
                 fontSize: '0.82rem',
                 color: '#1A1A2E',
-                background: '#F8F9FC',
+                background: loading ? '#F3F4F6' : '#F8F9FC',
                 transition: 'border-color 0.2s',
+                cursor: loading ? 'not-allowed' : 'text',
               }}
-              onFocus={(e) => (e.target.style.borderColor = '#4A90D9')}
-              onBlur={(e) => (e.target.style.borderColor = 'rgba(74,144,217,0.25)')}
+              onFocus={(e) =>
+                (e.target.style.borderColor = '#4A90D9')
+              }
+              onBlur={(e) =>
+                (e.target.style.borderColor = 'rgba(74,144,217,0.25)')
+              }
             />
             <button
-              onClick={sendMessage}
+              onClick={() => sendMessage(input)}
               disabled={loading || !input.trim()}
+              aria-label="Отправить"
               style={{
                 width: 38,
                 height: 38,
                 borderRadius: '50%',
-                background: input.trim() && !loading
-                  ? 'linear-gradient(135deg, #4A90D9, #357ABD)'
-                  : '#E5E7EB',
+                background:
+                  input.trim() && !loading
+                    ? 'linear-gradient(135deg, #4A90D9, #357ABD)'
+                    : '#E5E7EB',
                 border: 'none',
-                cursor: input.trim() && !loading ? 'pointer' : 'not-allowed',
+                cursor:
+                  input.trim() && !loading ? 'pointer' : 'not-allowed',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'all 0.2s',
+                transition: 'background 0.2s',
                 flexShrink: 0,
               }}
-              aria-label="Отправить"
             >
-              <Send size={16} color={input.trim() && !loading ? '#fff' : '#9CA3AF'} />
+              <Send
+                size={16}
+                color={input.trim() && !loading ? '#fff' : '#9CA3AF'}
+              />
             </button>
           </div>
         </div>
       )}
 
-      {/* Floating button */}
+      {/* ── Floating trigger button ───────────────────────────────────── */}
       <button
         onClick={() => setIsOpen((v) => !v)}
         aria-label={isOpen ? 'Закрыть чат' : 'Открыть чат'}
@@ -420,12 +497,14 @@ export default function ChatWidget() {
           transition: 'transform 0.2s, box-shadow 0.2s',
         }}
         onMouseEnter={(e) => {
-          ;(e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.08)'
-          ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 6px 28px rgba(74,144,217,0.6)'
+          const b = e.currentTarget
+          b.style.transform = 'scale(1.08)'
+          b.style.boxShadow = '0 6px 28px rgba(74,144,217,0.6)'
         }}
         onMouseLeave={(e) => {
-          ;(e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'
-          ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 20px rgba(74,144,217,0.45)'
+          const b = e.currentTarget
+          b.style.transform = 'scale(1)'
+          b.style.boxShadow = '0 4px 20px rgba(74,144,217,0.45)'
         }}
       >
         {isOpen ? (
@@ -442,21 +521,22 @@ export default function ChatWidget() {
               inset: 0,
               borderRadius: '50%',
               border: '2px solid rgba(74,144,217,0.5)',
-              animation: 'chat-pulse 2s ease-out infinite',
+              animation: 'chatPulse 2s ease-out infinite',
+              pointerEvents: 'none',
             }}
           />
         )}
       </button>
 
-      {/* Keyframe styles */}
+      {/* ── Global keyframes ──────────────────────────────────────────── */}
       <style>{`
-        @keyframes chat-pulse {
+        @keyframes chatPulse {
           0%   { transform: scale(1);   opacity: 0.8; }
-          100% { transform: scale(1.6); opacity: 0; }
+          100% { transform: scale(1.65); opacity: 0; }
         }
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to   { transform: rotate(360deg); }
+        @keyframes chatDotBounce {
+          0%, 60%, 100% { transform: translateY(0);    opacity: 0.5; }
+          30%            { transform: translateY(-6px); opacity: 1;   }
         }
       `}</style>
     </>

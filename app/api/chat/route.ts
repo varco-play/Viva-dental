@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+// ─── Clinic knowledge injected as system context ───────────────────────────
 const CLINIC_KNOWLEDGE = `
 Ты — ИИ-ассистент стоматологической клиники Viva Dental. Ты говоришь только на русском языке.
 Ты дружелюбный, профессиональный и помогаешь пациентам найти нужную информацию, записаться на приём или получить консультацию.
@@ -117,59 +118,65 @@ Email: info@vivadental.uz
 
 ## ОТЗЫВЫ ПАЦИЕНТОВ
 
-- Мария К. (март 2025, имплантация): «Делала имплант у Екатерины Олеговны. Всё прошло безболезненно, очень внимательный подход. Клиника современная, чистая, персонал приветливый.»
-- Алексей П. (февраль 2025, терапия): «Лечил зубы впервые за много лет — очень боялся. Анна Сергеевна успокоила, объяснила каждый шаг. Абсолютно без боли!»
-- Елена В. (январь 2025, ортодонтия): «Поставила брекеты у Дмитрия Александровича. Прикус исправили за 14 месяцев. Всё под контролем.»
-- Сергей Т. (декабрь 2024, детская стоматология): «Привёл ребёнка — Ольга Павловна нашла подход, малыш совсем не боялся!»
-- Наталья М. (ноябрь 2024, виниры): «Сделала виниры — наконец-то улыбаюсь открыто!»
+- Мария К. (март 2025, имплантация): «Всё прошло безболезненно. Клиника современная, чистая, персонал приветливый.»
+- Алексей П. (февраль 2025, терапия): «Анна Сергеевна успокоила, объяснила каждый шаг. Абсолютно без боли!»
+- Елена В. (январь 2025, ортодонтия): «Прикус исправили за 14 месяцев. Всё под контролем.»
+- Сергей Т. (декабрь 2024, детская стоматология): «Ольга Павловна нашла подход, малыш совсем не боялся!»
 
 ---
 
-## ВАЖНЫЕ ПРАВИЛА ДЛЯ АССИСТЕНТА
+## ПРАВИЛА ДЛЯ АССИСТЕНТА
 
-- Если пациент жалуется на боль — посочувствуй и предложи записаться как можно скорее, объясни, к какому врачу.
-- Если спрашивают о конкретной процедуре — расскажи кратко что это, сколько стоит и сколько времени займёт.
-- Если спрашивают о враче — опиши специализацию.
-- Если хотят записаться — скажи что можно позвонить, написать в WhatsApp/Telegram или заполнить форму на сайте.
+- Если пациент жалуется на боль — посочувствуй и предложи записаться как можно скорее, объясни к какому врачу.
+- Если спрашивают о процедуре — расскажи кратко: что это, стоимость, длительность.
+- Если хотят записаться — дай контакты и скажи что можно заполнить форму на сайте.
 - Никогда не ставь медицинские диагнозы.
 - Отвечай тепло, как живой администратор клиники.
-`
+- Используй разрывы строк для читаемости длинных ответов.
+`.trim()
+
+// ─── Supported model with free-tier quota ─────────────────────────────────
+const GEMINI_MODEL = 'gemini-2.5-flash-lite'
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages } = await req.json()
-
-    if (!messages || !Array.isArray(messages)) {
-      return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+    // 1. Parse body
+    const body = await req.json().catch(() => null)
+    if (!body || !Array.isArray(body.messages)) {
+      return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
     }
 
+    const { messages } = body as { messages: { role: string; content: string }[] }
+
+    // 2. Check API key
     const apiKey = process.env.GEMINI_API_KEY
-    if (!apiKey) {
+    if (!apiKey || apiKey.trim() === '') {
+      console.error('[chat] GEMINI_API_KEY is not set')
       return NextResponse.json(
-        { error: 'API key not configured' },
-        { status: 500 }
+        { error: 'Сервис временно недоступен. Позвоните нам: +998 (71) 123-45-67' },
+        { status: 503 }
       )
     }
 
-    // Build Gemini contents array
-    // First message is always the system context injected as first user turn
+    // 3. Build conversation — system knowledge prepended as first user/model turn
     const contents = [
-      {
-        role: 'user',
-        parts: [{ text: CLINIC_KNOWLEDGE }],
-      },
+      { role: 'user', parts: [{ text: CLINIC_KNOWLEDGE }] },
       {
         role: 'model',
-        parts: [{ text: 'Понял! Я готов помогать пациентам клиники Viva Dental. Буду отвечать дружелюбно и профессионально.' }],
+        parts: [{ text: 'Понял! Готов помогать пациентам клиники Viva Dental.' }],
       },
-      ...messages.map((m: { role: string; content: string }) => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }],
-      })),
+      // Actual conversation — only include user + assistant messages
+      ...messages
+        .filter((m) => m.role === 'user' || m.role === 'assistant')
+        .map((m) => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content }],
+        })),
     ]
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+    // 4. Call Gemini
+    const geminiRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -177,35 +184,58 @@ export async function POST(req: NextRequest) {
           contents,
           generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 512,
+            maxOutputTokens: 600,
           },
-          safetySettings: [
-            { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
-            { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
-          ],
         }),
       }
     )
 
-    if (!response.ok) {
-      const err = await response.text()
-      console.error('Gemini API error:', err)
+    // 5. Handle Gemini errors
+    if (!geminiRes.ok) {
+      const errBody = await geminiRes.json().catch(() => ({}))
+      const errMsg = errBody?.error?.message ?? 'Unknown Gemini error'
+      const status = geminiRes.status
+
+      console.error(`[chat] Gemini API ${status}:`, errMsg)
+
+      // Rate limit — tell user to try again shortly
+      if (status === 429) {
+        return NextResponse.json(
+          {
+            error:
+              'Ассистент перегружен, попробуйте через минуту. Или позвоните нам: +998 (71) 123-45-67',
+          },
+          { status: 429 }
+        )
+      }
+
       return NextResponse.json(
-        { error: 'AI service error' },
+        { error: 'Ошибка AI-сервиса. Позвоните нам: +998 (71) 123-45-67' },
         { status: 502 }
       )
     }
 
-    const data = await response.json()
-    const text =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ??
-      'Извините, не удалось получить ответ. Пожалуйста, позвоните нам: +998 (71) 123-45-67'
+    // 6. Extract text
+    const data = await geminiRes.json()
+    const text: string | undefined =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text
+
+    if (!text) {
+      console.error('[chat] Gemini returned no text:', JSON.stringify(data))
+      return NextResponse.json(
+        {
+          error:
+            'Не удалось сформировать ответ. Позвоните нам: +998 (71) 123-45-67',
+        },
+        { status: 502 }
+      )
+    }
 
     return NextResponse.json({ message: text })
-  } catch (error) {
-    console.error('Chat route error:', error)
+  } catch (err) {
+    console.error('[chat] Unexpected error:', err)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Внутренняя ошибка. Позвоните нам: +998 (71) 123-45-67' },
       { status: 500 }
     )
   }
