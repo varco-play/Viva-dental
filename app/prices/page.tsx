@@ -45,7 +45,7 @@ export default function PricesPage() {
       </section>
 
       {/* Sticky filter */}
-      <section className="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
+      <section className="bg-white border-b border-gray-100 sticky top-16 sm:top-24 z-40 shadow-sm">
         <div className="container-wide py-4">
           <div className="flex flex-wrap gap-2">
             <button

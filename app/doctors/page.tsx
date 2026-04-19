@@ -46,7 +46,7 @@ export default function DoctorsPage() {
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 {/* Photo area */}
-                <div className="relative h-52 bg-gradient-to-br from-navy to-teal-dark overflow-hidden">
+                <div className="relative h-52 bg-gradient-to-br from-blue-dark to-blue-mid overflow-hidden">
                   <div className="absolute inset-0 bg-dots opacity-30" />
                   {/* Initials as placeholder */}
                   <div className="absolute inset-0 flex items-center justify-center">

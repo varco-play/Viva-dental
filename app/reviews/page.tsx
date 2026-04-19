@@ -116,7 +116,7 @@ export default function ReviewsPage() {
               >
                 <div className="card h-full flex flex-col gap-4 group-hover:border-teal/30">
                   {/* Placeholder image */}
-                  <div className="h-40 rounded-xl bg-gradient-to-br from-navy to-teal-dark flex items-center justify-center relative overflow-hidden">
+                  <div className="h-40 rounded-xl bg-gradient-to-br from-blue-dark to-blue-mid flex items-center justify-center relative overflow-hidden">
                     <div className="absolute inset-0 bg-dots opacity-30" />
                     <BookOpen size={36} className="relative z-10 text-teal/60" />
                   </div>

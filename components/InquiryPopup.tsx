@@ -3,10 +3,10 @@ import { useState, useEffect, useRef } from 'react'
 import { X, CheckCircle, Loader2, Phone, Mail, User, MessageSquare, Sparkles } from 'lucide-react'
 
 export default function InquiryPopup() {
-  const [open, setOpen] = useState(false)
-  const [visible, setVisible] = useState(false)
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' })
+  const [open,      setOpen]      = useState(false)
+  const [visible,   setVisible]   = useState(false)
+  const [status,    setStatus]    = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [form,      setForm]      = useState({ name: '', phone: '', email: '', message: '' })
   const firstInput = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -24,22 +24,17 @@ export default function InquiryPopup() {
     }
   }, [visible])
 
-  // Trap body scroll
   useEffect(() => {
     if (open) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = ''
+    else       document.body.style.overflow = ''
     return () => { document.body.style.overflow = '' }
   }, [open])
 
   const close = () => {
     setVisible(false)
-    setTimeout(() => {
-      setOpen(false)
-      setStatus('idle')
-    }, 300)
+    setTimeout(() => { setOpen(false); setStatus('idle') }, 300)
   }
 
-  // Close on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') close() }
     window.addEventListener('keydown', handler)
@@ -55,9 +50,9 @@ export default function InquiryPopup() {
     setStatus('loading')
     try {
       const res = await fetch('/api/contact', {
-        method: 'POST',
+        method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body:    JSON.stringify(form),
       })
       if (res.ok) {
         setStatus('success')
@@ -72,15 +67,15 @@ export default function InquiryPopup() {
 
   if (!open) return null
 
-  const inputClass = `w-full border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-sm
-    focus:outline-none focus:ring-2 focus:ring-teal/40 focus:border-teal
-    transition-all duration-200 bg-white placeholder:text-gray-300`
+  const inputClass = `w-full border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-sm font-medium
+    focus:outline-none focus:ring-2 focus:ring-blue/30 focus:border-blue
+    transition-all duration-200 bg-white placeholder:text-gray-300 text-ink`
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className={`absolute inset-0 bg-navy/70 backdrop-blur-sm transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute inset-0 bg-blue-dark/70 backdrop-blur-sm transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
         onClick={close}
       />
 
@@ -97,30 +92,30 @@ export default function InquiryPopup() {
           {/* Close button */}
           <button
             onClick={close}
-            className="absolute top-5 right-5 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-400 hover:text-charcoal transition-all duration-200"
+            className="absolute top-5 right-5 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-400 hover:text-ink transition-all duration-200"
           >
             <X size={16} />
           </button>
 
           {status === 'success' ? (
             <div className="text-center py-8 animate-scale-in">
-              <div className="w-20 h-20 rounded-full bg-gradient-teal flex items-center justify-center mx-auto mb-5 shadow-teal">
+              <div className="w-20 h-20 rounded-full bg-gradient-teal flex items-center justify-center mx-auto mb-5 shadow-blue">
                 <CheckCircle size={40} className="text-white" />
               </div>
-              <h3 className="text-2xl font-black text-charcoal mb-2">Заявка отправлена!</h3>
-              <p className="text-muted mb-6">Мы свяжемся с вами в течение 30 минут в рабочее время.</p>
+              <h3 className="text-2xl font-black text-ink mb-2">Заявка отправлена!</h3>
+              <p className="text-slate mb-6">Мы свяжемся с вами в течение 30 минут в рабочее время.</p>
               <button onClick={close} className="btn-primary">Отлично, закрыть</button>
             </div>
           ) : (
             <>
               {/* Header */}
               <div className="mb-6">
-                <div className="flex items-center gap-2 text-teal text-sm font-semibold mb-2">
+                <div className="flex items-center gap-2 text-blue text-sm font-bold mb-2">
                   <Sparkles size={14} />
                   Запись онлайн
                 </div>
-                <h2 className="text-2xl font-black text-charcoal">Записаться на приём</h2>
-                <p className="text-muted text-sm mt-1">Оставьте заявку — перезвоним и подберём удобное время</p>
+                <h2 className="text-2xl font-black text-ink">Записаться на приём</h2>
+                <p className="text-slate text-sm mt-1">Оставьте заявку — перезвоним и подберём удобное время</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-3">
@@ -193,9 +188,9 @@ export default function InquiryPopup() {
                   ) : 'Отправить заявку'}
                 </button>
 
-                <p className="text-xs text-muted text-center">
+                <p className="text-xs text-slate text-center">
                   Нажимая кнопку, вы соглашаетесь с{' '}
-                  <a href="#" className="text-teal hover:underline">обработкой персональных данных</a>
+                  <a href="#" className="text-blue hover:underline">обработкой персональных данных</a>
                 </p>
               </form>
             </>
