@@ -36,17 +36,17 @@ function Counter({ end, suffix = '', duration = 2000 }: { end: number; suffix?: 
 }
 
 const stats = [
-  { end: 12,   suffix: '+', label: 'Лет опыта',           icon: Award },
-  { end: 8500, suffix: '+', label: 'Пациентов',            icon: Users },
-  { end: 15,   suffix: '',  label: 'Специалистов',         icon: Stethoscope },
-  { end: 98,   suffix: '%', label: 'Довольны результатом', icon: Star },
+  { end: 10,      suffix: '+', label: 'Лет опыта',           icon: Award },
+  { end: 150000,  suffix: '+', label: 'Пациентов',            icon: Users },
+  { end: 2,       suffix: '',  label: 'Филиала в Ташкенте',   icon: Stethoscope },
+  { end: 98,      suffix: '%', label: 'Довольны результатом', icon: Star },
 ]
 
 const features = [
-  { icon: Shield,   title: 'Гарантия качества',     desc: 'Письменная гарантия на все виды лечения. Работаем на сертифицированных материалах.' },
-  { icon: Clock,    title: 'Удобное расписание',    desc: 'Работаем 7 дней в неделю. Приём без очередей по предварительной записи.' },
-  { icon: Award,    title: 'Передовые технологии',  desc: 'Цифровая рентгенография, современное оборудование Planmeca и Sirona.' },
-  { icon: Sparkles, title: 'Безболезненно',          desc: 'Современные анестетики делают лечение комфортным даже для тревожных пациентов.' },
+  { icon: Award,    title: 'Точная диагностика',    desc: '3D КТ-рентген MORITA X800 и современные методы лечения для быстрого и безопасного результата.' },
+  { icon: Shield,   title: 'Чистота и безопасность', desc: 'Строгое соблюдение стандартов стерилизации и антисептики. Ваша безопасность — наш приоритет.' },
+  { icon: Sparkles, title: 'Без боли',               desc: 'Современные анестетики делают лечение комфортным даже для самых тревожных пациентов.' },
+  { icon: Clock,    title: 'Удобный график',         desc: 'Работаем каждый день с 10:00 до 19:00. 3D КТ доступно ежедневно с 9:00 до 22:00.' },
 ]
 
 const serviceCards: { title: string; desc: string; Icon: LucideIcon }[] = [
@@ -116,7 +116,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-wrap gap-5 mt-10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
-              {['Лицензия МЗ РУз', 'Гарантия на лечение', 'Скидка 10% семьям'].map((b) => (
+              {['Лицензия МЗ РУз', '3D КТ MORITA X800', 'Скидка 10% семьям'].map((b) => (
                 <div key={b} className="flex items-center gap-1.5 text-muted text-sm">
                   <CheckCircle size={14} className="text-green-brand flex-shrink-0" />
                   {b}

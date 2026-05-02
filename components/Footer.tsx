@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Phone, Mail, MapPin, Clock, ArrowRight, Instagram, Send } from 'lucide-react'
+import { Phone, MapPin, Clock, ArrowRight, Instagram, Send } from 'lucide-react'
 
 const navLinks = [
   { href: '/about',    label: 'О клинике' },
@@ -41,26 +41,32 @@ export default function Footer() {
               />
             </Link>
             <p className="text-sm leading-relaxed text-slate mb-5">
-              Профессиональная стоматологическая помощь с заботой о каждом пациенте. Современные технологии, опытные врачи.
+              Профессиональная стоматологическая помощь с заботой о каждом пациенте. Два современных филиала в Ташкенте.
             </p>
             {/* Social icons */}
             <div className="flex gap-2.5">
               <a
-                href="#"
+                href="https://instagram.com/VIVA_DENTAL_GROUP_Huvaydo"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-9 h-9 rounded-xl bg-white border border-blue-pale flex items-center justify-center text-slate hover:text-blue hover:border-blue transition-all duration-200 shadow-sm"
               >
                 <Instagram size={16} />
               </a>
               <a
-                href="#"
+                href="https://t.me/VIVA_DENTAL_GROUP_Huvaydo"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Telegram"
                 className="w-9 h-9 rounded-xl bg-white border border-blue-pale flex items-center justify-center text-slate hover:text-blue hover:border-blue transition-all duration-200 shadow-sm"
               >
                 <Send size={15} />
               </a>
               <a
-                href="#"
+                href="https://wa.me/998955030001"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="WhatsApp"
                 className="w-9 h-9 rounded-xl bg-white border border-blue-pale flex items-center justify-center text-slate hover:text-blue hover:border-blue transition-all duration-200 shadow-sm"
               >
@@ -119,31 +125,31 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-xl bg-blue-pale flex items-center justify-center flex-shrink-0 mt-0.5">
                   <MapPin size={14} className="text-blue" />
                 </div>
-                <span className="text-sm text-slate leading-relaxed">г. Ташкент, ул. Амира Темура, д. 1</span>
+                <span className="text-sm text-slate leading-relaxed">
+                  г. Ташкент, Шайхантахурский р-н, Зафаробод 50
+                </span>
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-blue-pale flex items-center justify-center flex-shrink-0">
                   <Phone size={14} className="text-blue" />
                 </div>
-                <a href="tel:+998955030001" className="text-sm text-slate hover:text-blue transition-colors">
-                  +998 (95) 503-00-01
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-blue-pale flex items-center justify-center flex-shrink-0">
-                  <Mail size={14} className="text-blue" />
+                <div className="flex flex-col">
+                  <a href="tel:+998955030001" className="text-sm text-slate hover:text-blue transition-colors">
+                    +998 (95) 503-00-01
+                  </a>
+                  <a href="tel:+998993940008" className="text-sm text-slate hover:text-blue transition-colors">
+                    +998 (99) 394-00-08
+                  </a>
                 </div>
-                <a href="mailto:info@vivadental.uz" className="text-sm text-slate hover:text-blue transition-colors">
-                  info@vivadental.uz
-                </a>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-xl bg-blue-pale flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Clock size={14} className="text-blue" />
                 </div>
                 <div className="text-sm text-slate">
-                  <div>Пн–Сб: 9:00–21:00</div>
-                  <div>Вс: 10:00–18:00</div>
+                  <div>Пн–Вс: 10:00–19:00</div>
+                  <div className="text-xs text-muted mt-0.5">Последняя запись в 18:00</div>
+                  <div className="text-xs text-muted">3D КТ: ежедневно 9:00–22:00</div>
                 </div>
               </li>
             </ul>
@@ -154,8 +160,8 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-blue-pale">
         <div className="container-wide py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-slate">
-          <span>© 2025 Viva Dental Group. Все права защищены.</span>
-          <span>Лицензия МЗ РУз № XXXXXXXX</span>
+          <span>© 2026 Viva Dental Group. Все права защищены.</span>
+          <span>СТИР: 307594539</span>
         </div>
       </div>
     </footer>

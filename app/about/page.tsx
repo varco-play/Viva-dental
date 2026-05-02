@@ -4,19 +4,19 @@ import { CheckCircle, Award, Heart, Users, Shield, Sparkles } from 'lucide-react
 import PopupButton from '@/components/PopupButton'
 
 const values = [
-  { icon: Heart, title: 'Забота о пациенте', desc: 'Атмосфера доверия и комфорта. Каждый пациент — индивидуальный подход и честный план лечения.' },
-  { icon: Award, title: 'Высокое качество', desc: 'Используем только сертифицированные материалы и оборудование ведущих мировых производителей.' },
-  { icon: Users, title: 'Команда профессионалов', desc: 'Наши врачи — специалисты высшей категории с многолетним опытом и непрерывным обучением.' },
-  { icon: Shield, title: 'Безопасность', desc: 'Строгое соблюдение стандартов стерилизации и антисептики. Ваша безопасность — наш приоритет.' },
+  { icon: Heart, title: 'Призвание и забота', desc: 'Атмосфера доверия и комфорта. Каждый пациент получает индивидуальный подход и честный план лечения без лишнего стресса.' },
+  { icon: Award, title: 'Высокие технологии', desc: 'Используем 3D-рентген (MORITA X800), современное оборудование и передовые методы лечения для точного и безопасного результата.' },
+  { icon: Shield, title: 'Чистота и безопасность', desc: 'Строгое соблюдение стандартов стерилизации и антисептики. Ваша безопасность — абсолютный приоритет клиники.' },
+  { icon: Users, title: 'Опытная команда', desc: 'Наши врачи — специалисты с международными сертификатами и непрерывным обучением. Профессионализм без компромиссов.' },
 ]
 
 const achievements = [
-  'Лицензия Министерства здравоохранения Республики Узбекистан',
-  'Сертификаты ISO 9001:2015',
-  'Партнёр ведущих стоматологических академий Узбекистана',
-  'Победитель премии «Лучшая клиника года» 2022, 2023',
-  'Более 50 дипломов и сертификатов врачей',
-  'Современное оборудование Planmeca и Sirona',
+  'Лицензия Министерства здравоохранения Республики Узбекистан (СТИР: 307594539)',
+  '3D КТ-рентген MORITA X800 — точная диагностика для точного лечения',
+  'Международное обучение врачей: Китай, Корея, Турция, Германия, Франция, Бельгия',
+  'Основатель клиники прошёл ординатуру в ANDC — Международная академия стоматологов (Корея)',
+  'Оплата удобным способом: наличные и банковская карта',
+  'Два современных филиала в Ташкенте для удобства пациентов',
 ]
 
 export default function AboutPage() {
@@ -39,10 +39,10 @@ export default function AboutPage() {
         <div className="container-wide relative z-10">
           <div className="tag animate-fade-up"><span className="tag-dot" />О клинике</div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-ink mt-2 mb-4 max-w-2xl animate-fade-up" style={{ animationDelay: '0.1s' }}>
-            12 лет заботы<br /><span className="text-gradient">о вашей улыбке</span>
+            10 лет заботы<br /><span className="text-gradient">о вашей улыбке</span>
           </h1>
           <p className="text-slate text-lg max-w-xl animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Viva Dental Group — это современная многопрофильная стоматологическая клиника, созданная с одной целью: дать каждому пациенту красивую и здоровую улыбку.
+            Viva Dental Group — современная многопрофильная стоматологическая клиника с двумя филиалами в Ташкенте. Основана в 2016 году с одной целью: дать каждому пациенту здоровую и красивую улыбку.
           </p>
         </div>
       </section>
@@ -55,9 +55,9 @@ export default function AboutPage() {
               <div className="tag reveal"><span className="tag-dot" />Наша история</div>
               <h2 className="section-title reveal delay-100">Клиника, которой<br />доверяют семьи</h2>
               <div className="space-y-4 text-muted leading-relaxed reveal delay-200">
-                <p>Viva Dental была основана в 2012 году группой врачей-стоматологов с единой миссией — сделать качественную стоматологическую помощь доступной и комфортной для каждого пациента.</p>
-                <p>За 12 лет работы мы приняли более 8500 пациентов, провели тысячи успешных операций по имплантации и создали сотни голливудских улыбок с помощью виниров и ортодонтии.</p>
-                <p>Сегодня Viva Dental — это команда из 15 специалистов, современное оборудование и атмосфера, в которой даже самые тревожные пациенты чувствуют себя спокойно.</p>
+                <p>Viva Dental Group основана 1 сентября 2016 года главным врачом Рашитходжаевым Саидхожой Набиходжаевичем с единой миссией — сделать профессиональную стоматологическую помощь доступной и комфортной для каждого.</p>
+                <p>За 10 лет работы клиника приняла более 150 000 пациентов и выросла до сети из двух современных филиалов в Ташкенте, оснащённых передовым оборудованием, включая 3D КТ-рентген MORITA X800.</p>
+                <p>Сегодня Viva Dental Group — это команда опытных специалистов с международными сертификатами, атмосфера заботы и высокие стандарты лечения, благодаря которым даже самые тревожные пациенты чувствуют себя спокойно.</p>
               </div>
               <div className="mt-6 reveal delay-300">
                 <PopupButton className="btn-primary">
@@ -69,9 +69,9 @@ export default function AboutPage() {
             {/* Stats */}
             <div className="grid grid-cols-2 gap-5">
               {[
-                { num: '12+', label: 'лет на рынке', color: 'bg-gradient-teal' },
-                { num: '8500+', label: 'пациентов', color: 'bg-navy' },
-                { num: '15', label: 'специалистов', color: 'bg-navy' },
+                { num: '10+', label: 'лет на рынке', color: 'bg-gradient-teal' },
+                { num: '150 000+', label: 'пациентов', color: 'bg-navy' },
+                { num: '2', label: 'филиала в Ташкенте', color: 'bg-navy' },
                 { num: '98%', label: 'довольны результатом', color: 'bg-gradient-teal' },
               ].map((s, i) => (
                 <div
@@ -79,7 +79,7 @@ export default function AboutPage() {
                   className={`${s.color} rounded-3xl p-6 text-white reveal`}
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
-                  <div className="text-4xl font-black mb-1">{s.num}</div>
+                  <div className="text-3xl font-black mb-1">{s.num}</div>
                   <div className="text-white/70 text-sm">{s.label}</div>
                 </div>
               ))}
@@ -120,7 +120,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="tag reveal"><span className="tag-dot" />Достижения</div>
-              <h2 className="section-title reveal delay-100">Сертификаты<br />и лицензии</h2>
+              <h2 className="section-title reveal delay-100">Сертификаты<br />и стандарты</h2>
               <ul className="space-y-3 mt-6">
                 {achievements.map((a, i) => (
                   <li key={a} className="reveal flex items-start gap-3" style={{ transitionDelay: `${i * 80}ms` }}>
@@ -141,8 +141,8 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-card-hover p-5">
-                <div className="text-3xl font-black text-teal">100%</div>
-                <div className="text-xs text-muted mt-1">Лицензированная<br />деятельность</div>
+                <div className="text-3xl font-black text-teal">3D</div>
+                <div className="text-xs text-muted mt-1">КТ MORITA X800<br />ежедневно 9–22</div>
               </div>
             </div>
           </div>

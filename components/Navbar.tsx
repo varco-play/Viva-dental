@@ -50,7 +50,7 @@ export default function Navbar() {
           <div className="container-wide flex items-center justify-between">
             <span className="flex items-center gap-1.5">
               <Clock size={11} className="opacity-50" />
-              Пн–Сб: 9:00–21:00 &nbsp;|&nbsp; Вс: 10:00–18:00
+              Пн–Вс: 10:00–19:00 &nbsp;|&nbsp; Последняя запись в 18:00
             </span>
             <a href="tel:+998955030001" className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone size={11} />

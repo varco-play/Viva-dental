@@ -118,6 +118,8 @@ export default function PricesPage() {
                 <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Указанные цены — минимальные. Точная стоимость определяется после осмотра.</li>
                 <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />10% скидка при семейном посещении.</li>
                 <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Скидка при лечении 2 и более зубов.</li>
+                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Оплата: наличные или банковская карта. Рассрочка не предусмотрена.</li>
+                <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Ортопедическое лечение: 70% — при начале, 30% — по завершении работы.</li>
                 <li className="flex items-start gap-2"><CheckCircle size={13} className="text-teal mt-0.5 flex-shrink-0" />Цены указаны в узбекских сумах (UZS).</li>
               </ul>
             </div>
