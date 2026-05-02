@@ -11,16 +11,15 @@ export default function PricesPage() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    // IntersectionObserver fires asynchronously and is unreliable when content
-    // is swapped by filter clicks — use double rAF so layout settles first
-    let raf2: number
-    const raf1 = requestAnimationFrame(() => {
-      raf2 = requestAnimationFrame(() => {
-        el.querySelectorAll('.reveal').forEach(e => e.classList.add('visible'))
-      })
-    })
-    return () => { cancelAnimationFrame(raf1); cancelAnimationFrame(raf2) }
-  }, [activeCategory])
+    // Only scroll-animate the info note and CTA — NOT the price tables
+    // (tables are primary content and must display immediately)
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    )
+    el.querySelectorAll('.reveal').forEach(e => obs.observe(e))
+    return () => obs.disconnect()
+  }, []) // runs once — .reveal elements here are static (info note + CTA)
 
   const categories = priceList.map(p => p.category)
   const filtered = activeCategory ? priceList.filter(p => p.category === activeCategory) : priceList
@@ -75,11 +74,11 @@ export default function PricesPage() {
         </div>
       </section>
 
-      {/* Price tables */}
+      {/* Price tables — no .reveal, tables display immediately */}
       <section className="section bg-surface">
         <div className="container-wide space-y-8">
-          {filtered.map((section, si) => (
-            <div key={section.category} className="reveal" style={{ transitionDelay: `${si * 80}ms` }}>
+          {filtered.map((section) => (
+            <div key={section.category}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-1.5 h-7 rounded-full bg-gradient-teal" />
                 <h2 className="text-xl font-black text-charcoal">{section.category}</h2>

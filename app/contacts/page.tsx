@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { Phone, MapPin, Clock, MessageCircle, ArrowRight, Send, Instagram } from 'lucide-react'
+import { Phone, MapPin, Clock, Send, Instagram } from 'lucide-react'
 import PopupButton from '@/components/PopupButton'
 
 const contactCards = [
@@ -14,12 +14,12 @@ const contactCards = [
     external: false,
   },
   {
-    icon: MessageCircle,
-    title: 'WhatsApp / Telegram',
-    value: '+998 (95) 503-00-01',
+    icon: Send,
+    title: 'Telegram',
+    value: '@VIVA_DENTAL_GROUP_Huvaydo',
     sub: 'Пишите в любое время',
-    href: 'https://wa.me/998955030001',
-    color: 'bg-green-brand',
+    href: 'https://t.me/VIVA_DENTAL_GROUP_Huvaydo',
+    color: 'bg-blue',
     external: true,
   },
   {
