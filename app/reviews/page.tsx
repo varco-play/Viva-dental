@@ -70,7 +70,7 @@ export default function ReviewsPage() {
                 </div>
 
                 {/* Text */}
-                <p className="text-charcoal text-sm leading-relaxed flex-1">"{review.text}"</p>
+                <p className="text-charcoal text-base leading-relaxed flex-1">"{review.text}"</p>
 
                 {/* Service tag */}
                 {review.service && (
@@ -85,7 +85,7 @@ export default function ReviewsPage() {
                     {review.name.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-bold text-charcoal text-sm">{review.name}</div>
+                    <div className="font-bold text-charcoal text-base">{review.name}</div>
                     {review.date && <div className="text-xs text-muted">{review.date}</div>}
                   </div>
                   <ThumbsUp size={14} className="ml-auto text-gray-200" />

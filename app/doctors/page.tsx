@@ -63,7 +63,7 @@ export default function DoctorsPage() {
 
                 {/* Info */}
                 <div className="p-6">
-                  <h3 className="text-lg font-black text-charcoal mb-1 group-hover:text-teal transition-colors">{doc.name}</h3>
+                  <h3 className="text-xl font-black text-charcoal mb-1 group-hover:text-teal transition-colors">{doc.name}</h3>
 
                   <div className="flex flex-wrap gap-3 mb-4">
                     <div className="flex items-center gap-1.5 text-muted text-xs">
@@ -73,7 +73,7 @@ export default function DoctorsPage() {
                     </div>
 
                   {doc.description && (
-                    <p className="text-muted text-sm leading-relaxed mb-4 line-clamp-3">{doc.description}</p>
+                    <p className="text-muted text-base leading-relaxed mb-4 line-clamp-3">{doc.description}</p>
                   )}
 
                   {doc.education && (

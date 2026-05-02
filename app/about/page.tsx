@@ -104,8 +104,8 @@ export default function AboutPage() {
                     <div className="w-12 h-12 rounded-2xl bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <Icon size={22} className="text-white" />
                     </div>
-                    <h3 className="font-bold text-charcoal mb-2">{v.title}</h3>
-                    <p className="text-muted text-sm leading-relaxed">{v.desc}</p>
+                    <h3 className="font-bold text-charcoal text-lg mb-2">{v.title}</h3>
+                    <p className="text-muted text-base leading-relaxed">{v.desc}</p>
                   </div>
                 </div>
               )
@@ -127,7 +127,7 @@ export default function AboutPage() {
                     <div className="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <CheckCircle size={14} className="text-teal" />
                     </div>
-                    <span className="text-charcoal text-sm">{a}</span>
+                    <span className="text-charcoal text-base">{a}</span>
                   </li>
                 ))}
               </ul>

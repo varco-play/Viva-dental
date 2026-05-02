@@ -175,8 +175,8 @@ export default function HomePage() {
                     <div className="w-12 h-12 rounded-2xl bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <Icon size={22} className="text-white" />
                     </div>
-                    <h3 className="font-bold text-ink mb-2 text-lg">{f.title}</h3>
-                    <p className="text-slate text-sm leading-relaxed">{f.desc}</p>
+                    <h3 className="font-bold text-ink mb-2 text-xl">{f.title}</h3>
+                    <p className="text-slate text-base leading-relaxed">{f.desc}</p>
                   </div>
                 </div>
               )
@@ -211,8 +211,8 @@ export default function HomePage() {
                   <div className="w-12 h-12 rounded-2xl bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <s.Icon size={22} className="text-white" />
                   </div>
-                  <h3 className="font-bold text-ink text-lg mb-1 group-hover:text-blue transition-colors">{s.title}</h3>
-                  <p className="text-slate text-sm mb-3">{s.desc}</p>
+                  <h3 className="font-bold text-ink text-xl mb-1 group-hover:text-blue transition-colors">{s.title}</h3>
+                  <p className="text-slate text-base mb-3">{s.desc}</p>
                   <span className="inline-flex items-center gap-1 text-blue text-sm font-bold">
                     Подробнее <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </span>

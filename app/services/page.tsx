@@ -67,14 +67,14 @@ export default function ServicesPage() {
                       {(() => { const Icon = serviceIcons[service.name]; return Icon ? <Icon size={20} className="text-white" /> : null })()}
                     </div>
                     <div className="flex-1">
-                      <h2 className="text-lg font-black text-charcoal mb-1 group-hover:text-teal transition-colors leading-tight">{service.name}</h2>
+                      <h2 className="text-xl font-black text-charcoal mb-1 group-hover:text-teal transition-colors leading-tight">{service.name}</h2>
                     </div>
                   </div>
                 </div>
 
                 {/* Description + highlights */}
                 <div className="px-7 pb-7">
-                  <p className="text-sm text-muted mb-4 leading-relaxed">{service.description}</p>
+                  <p className="text-base text-muted mb-4 leading-relaxed">{service.description}</p>
                   <div className="h-px bg-gray-50 mb-4" />
                   <ul className="space-y-1.5">
                     {service.highlights.map((h: string) => (

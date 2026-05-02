@@ -85,18 +85,18 @@
 
   /* ── Typography — Cormorant for display, Inter for body ── */
   .section-title {
-    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-ink mb-4 leading-tight;
+    @apply font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-ink mb-4 leading-tight;
     letter-spacing: -0.02em;
   }
   .section-title-white {
-    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight;
+    @apply font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight;
     letter-spacing: -0.02em;
   }
   .section-subtitle {
-    @apply text-slate text-lg mb-10 max-w-2xl leading-relaxed font-sans;
+    @apply text-slate text-base sm:text-lg mb-10 max-w-2xl leading-relaxed font-sans;
   }
   .section-subtitle-white {
-    @apply text-white/70 text-lg mb-10 max-w-2xl leading-relaxed font-sans;
+    @apply text-white/70 text-base sm:text-lg mb-10 max-w-2xl leading-relaxed font-sans;
   }
   .tag {
     @apply inline-flex items-center gap-1.5 text-blue text-xs font-semibold
