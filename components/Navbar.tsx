@@ -61,11 +61,11 @@ export default function Navbar() {
               </span>
             </div>
             <a
-              href="tel:+998711234567"
+              href="tel:+998955030001"
               className="flex items-center gap-1.5 hover:text-white transition-colors"
             >
               <Phone size={11} />
-              +998 (71) 123-45-67
+              +998 (95) 503-00-01
             </a>
           </div>
         </div>
@@ -77,9 +77,9 @@ export default function Navbar() {
             <Image
               src="/logo.jpg"
               alt="Viva Dental Group"
-              width={160}
-              height={48}
-              className="h-11 w-auto object-contain transition-opacity duration-200 group-hover:opacity-90"
+              width={180}
+              height={56}
+              className="h-12 sm:h-14 w-auto object-contain transition-opacity duration-200 group-hover:opacity-90"
               priority
             />
           </Link>
@@ -108,11 +108,11 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="tel:+998711234567"
+              href="tel:+998955030001"
               className="flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-blue transition-colors duration-200"
             >
               <Phone size={15} className="text-blue" />
-              <span className="hidden xl:block">+998 (71) 123-45-67</span>
+              <span className="hidden xl:block">+998 (95) 503-00-01</span>
             </a>
             <button onClick={openPopup} className="btn-primary text-sm py-2.5 px-5">
               Записаться
@@ -139,7 +139,7 @@ export default function Navbar() {
             <div className="container-wide py-4">
               {/* Phone block */}
               <a
-                href="tel:+998711234567"
+                href="tel:+998955030001"
                 className="flex items-center gap-3 py-3 px-4 rounded-2xl bg-blue-pale mb-4 text-ink"
               >
                 <div className="w-9 h-9 rounded-full bg-blue flex items-center justify-center flex-shrink-0">
@@ -147,7 +147,7 @@ export default function Navbar() {
                 </div>
                 <div>
                   <div className="text-xs text-slate">Позвонить нам</div>
-                  <div className="font-bold text-sm">+998 (71) 123-45-67</div>
+                  <div className="font-bold text-sm">+998 (95) 503-00-01</div>
                 </div>
               </a>
 

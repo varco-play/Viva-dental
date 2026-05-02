@@ -247,9 +247,9 @@ export default function HomePage() {
               <Calendar size={18} />
               Записаться онлайн
             </PopupButton>
-            <a href="tel:+998711234567" className="inline-flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-blue transition-all duration-300 text-base">
+            <a href="tel:+998955030001" className="inline-flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-blue transition-all duration-300 text-base">
               <Phone size={18} />
-              +998 (71) 123-45-67
+              +998 (95) 503-00-01
             </a>
           </div>
         </div>

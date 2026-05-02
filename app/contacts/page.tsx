@@ -7,9 +7,9 @@ const contactCards = [
   {
     icon: Phone,
     title: 'Телефон',
-    value: '+998 (71) 123-45-67',
+    value: '+998 (95) 503-00-01',
     sub: 'Пн–Вс: 9:00–21:00',
-    href: 'tel:+998711234567',
+    href: 'tel:+998955030001',
     color: 'bg-teal',
   },
   {
@@ -23,7 +23,7 @@ const contactCards = [
   {
     icon: MessageCircle,
     title: 'WhatsApp / Telegram',
-    value: '+998 (71) 123-45-67',
+    value: '+998 (95) 503-00-01',
     sub: 'Пишите в любое время',
     href: '#',
     color: 'bg-green-brand',
@@ -52,15 +52,13 @@ export default function ContactsPage() {
   return (
     <div ref={ref}>
       {/* Hero */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-navy" />
-        <div className="absolute inset-0 bg-dots opacity-30" />
+      <section className="relative py-14 overflow-hidden bg-gradient-to-b from-blue-pale to-white border-b border-blue/[0.07]">
         <div className="container-wide relative z-10 text-center">
           <div className="tag justify-center animate-fade-up"><span className="tag-dot" />Контакты</div>
-          <h1 className="text-5xl md:text-6xl font-black text-white mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-5xl md:text-6xl font-bold text-ink mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Свяжитесь<br /><span className="text-gradient">с нами</span>
           </h1>
-          <p className="text-white/60 text-lg max-w-xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-slate text-lg max-w-xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
             Мы всегда на связи. Запишитесь онлайн, позвоните или напишите — ответим быстро.
           </p>
         </div>
@@ -164,7 +162,7 @@ export default function ContactsPage() {
                     <Send size={15} />
                     Записаться онлайн
                   </PopupButton>
-                  <a href="tel:+998711234567" className="btn-outline text-sm py-2.5 flex-1 justify-center">
+                  <a href="tel:+998955030001" className="btn-outline text-sm py-2.5 flex-1 justify-center">
                     <Phone size={15} />
                     Позвонить
                   </a>

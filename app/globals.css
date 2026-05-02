@@ -8,51 +8,61 @@
   }
   body {
     @apply text-ink bg-white font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.65;
   }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold leading-tight;
+
+  /* Cormorant Garamond for all display headings — elegant, not cartoon-like */
+  h1, h2, h3 {
+    @apply font-serif font-bold leading-tight;
+    letter-spacing: -0.02em;
+  }
+  h4, h5, h6 {
+    @apply font-sans font-semibold leading-tight;
   }
 }
 
 @layer components {
   /* ── Buttons ── */
   .btn-primary {
-    @apply bg-blue text-white px-6 py-3 rounded-full font-bold
+    @apply bg-blue text-white px-6 py-3 rounded-full font-semibold
            hover:bg-blue-dark shadow-blue hover:shadow-blue-lg
            transition-all duration-300 inline-flex items-center gap-2 cursor-pointer
            hover:-translate-y-0.5 active:translate-y-0;
+    letter-spacing: 0.01em;
   }
   .btn-outline {
-    @apply border-2 border-blue text-blue px-6 py-3 rounded-full font-bold
+    @apply border-2 border-blue text-blue px-6 py-3 rounded-full font-semibold
            hover:bg-blue hover:text-white transition-all duration-300
            inline-flex items-center gap-2 cursor-pointer
            hover:-translate-y-0.5 active:translate-y-0;
+    letter-spacing: 0.01em;
   }
   .btn-navy {
-    @apply bg-blue-dark text-white px-6 py-3 rounded-full font-bold
-           hover:bg-navy shadow-blue
-           transition-all duration-300 inline-flex items-center gap-2 cursor-pointer
+    @apply bg-blue-dark text-white px-6 py-3 rounded-full font-semibold
+           hover:bg-navy shadow-blue transition-all duration-300
+           inline-flex items-center gap-2 cursor-pointer
            hover:-translate-y-0.5 active:translate-y-0;
   }
   .btn-white {
-    @apply bg-white text-blue px-6 py-3 rounded-full font-bold
+    @apply bg-white text-blue px-6 py-3 rounded-full font-semibold
            hover:bg-blue-pale shadow-card hover:shadow-card-hover
            transition-all duration-300 inline-flex items-center gap-2 cursor-pointer
            hover:-translate-y-0.5 active:translate-y-0;
+    letter-spacing: 0.01em;
   }
   .btn-green {
-    @apply bg-green text-white px-6 py-3 rounded-full font-bold
-           hover:bg-green-dark shadow-green
-           transition-all duration-300 inline-flex items-center gap-2 cursor-pointer
+    @apply bg-green text-white px-6 py-3 rounded-full font-semibold
+           hover:bg-green-dark shadow-green transition-all duration-300
+           inline-flex items-center gap-2 cursor-pointer
            hover:-translate-y-0.5 active:translate-y-0;
   }
-  /* keep legacy aliases */
   .btn-gold { @apply btn-primary; }
 
   /* ── Cards ── */
   .card {
-    @apply bg-white rounded-2xl shadow-card border border-gray-100 p-6
-           hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1;
+    @apply bg-white rounded-2xl shadow-card border border-gray-100/80 p-6
+           hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5;
   }
   .card-navy {
     @apply bg-blue-dark rounded-2xl p-6 text-white transition-all duration-300 hover:-translate-y-1;
@@ -73,110 +83,109 @@
     @apply py-10 md:py-16;
   }
 
-  /* ── Typography ── */
+  /* ── Typography — Cormorant for display, Inter for body ── */
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-extrabold text-ink mb-4 leading-tight;
+    @apply font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ink mb-4 leading-tight;
+    letter-spacing: -0.02em;
   }
   .section-title-white {
-    @apply text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4 leading-tight;
+    @apply font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight;
+    letter-spacing: -0.02em;
   }
   .section-subtitle {
-    @apply text-slate text-lg mb-10 max-w-2xl leading-relaxed;
+    @apply text-slate text-lg mb-10 max-w-2xl leading-relaxed font-sans;
   }
   .section-subtitle-white {
-    @apply text-white/70 text-lg mb-10 max-w-2xl leading-relaxed;
+    @apply text-white/70 text-lg mb-10 max-w-2xl leading-relaxed font-sans;
   }
   .tag {
-    @apply inline-flex items-center gap-1.5 text-blue text-sm font-bold
-           uppercase tracking-wider mb-3;
+    @apply inline-flex items-center gap-1.5 text-blue text-xs font-semibold
+           uppercase tracking-widest mb-3 font-sans;
   }
   .tag-dot {
-    @apply w-2 h-2 rounded-full bg-blue inline-block;
+    @apply w-1.5 h-1.5 rounded-full bg-blue inline-block;
   }
 
-  /* ── Gradient text ── */
+  /* ── Accent gradient text (blue→green, for decorative headings) ── */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-teal;
+    background-image: linear-gradient(135deg, #1A4FA0, #27AE60);
+    @apply bg-clip-text text-transparent;
+  }
+  /* Blue-only gradient text for light backgrounds */
+  .text-gradient-blue {
+    background-image: linear-gradient(135deg, #1A4FA0, #2D7DD2);
+    @apply bg-clip-text text-transparent;
   }
 
   /* ── Divider ── */
   .divider-teal {
-    @apply w-12 h-1 rounded-full bg-gradient-teal mb-4;
+    @apply w-10 h-0.5 rounded-full bg-blue mb-4;
   }
   .divider-blue {
-    @apply w-12 h-1 rounded-full bg-blue mb-4;
+    @apply w-10 h-0.5 rounded-full bg-blue mb-4;
   }
 
-  /* ── Animated underline on links ── */
+  /* ── Animated underline ── */
   .link-underline {
-    @apply relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
+    @apply relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px
            after:bg-blue after:transition-all after:duration-300 hover:after:w-full;
   }
 }
 
-/* ── Intersection observer animation helpers ── */
+/* ── Intersection observer animations ── */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(24px);
   transition: opacity 0.65s ease, transform 0.65s ease;
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
 .reveal-left {
   opacity: 0;
-  transform: translateX(-36px);
+  transform: translateX(-32px);
   transition: opacity 0.65s ease, transform 0.65s ease;
 }
-.reveal-left.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
 .reveal-right {
   opacity: 0;
-  transform: translateX(36px);
+  transform: translateX(32px);
   transition: opacity 0.65s ease, transform 0.65s ease;
 }
-.reveal-right.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.94);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: scale(0.95);
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
-.reveal-scale.visible {
-  opacity: 1;
-  transform: scale(1);
-}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
 
-/* Stagger delays */
-.delay-100 { transition-delay: 0.1s; }
-.delay-200 { transition-delay: 0.2s; }
-.delay-300 { transition-delay: 0.3s; }
-.delay-400 { transition-delay: 0.4s; }
-.delay-500 { transition-delay: 0.5s; }
-.delay-600 { transition-delay: 0.6s; }
+/* Stagger helpers */
+.delay-100 { transition-delay: 0.10s; }
+.delay-200 { transition-delay: 0.20s; }
+.delay-300 { transition-delay: 0.30s; }
+.delay-400 { transition-delay: 0.40s; }
+.delay-500 { transition-delay: 0.50s; }
+.delay-600 { transition-delay: 0.60s; }
 
-/* ── Background patterns (blue-tinted) ── */
+/* ── Background patterns — very subtle ── */
 .bg-dots {
-  background-image: radial-gradient(rgba(26, 79, 160, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(26, 79, 160, 0.08) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 .bg-grid {
   background-image:
-    linear-gradient(rgba(26, 79, 160, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 79, 160, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(26, 79, 160, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 79, 160, 0.035) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F4F9FF; }
-::-webkit-scrollbar-thumb { background: #1A4FA0; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #0D2E6A; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #F8FBFF; }
+::-webkit-scrollbar-thumb { background: #93BBEF; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #1A4FA0; }
 
 /* ── Focus ring ── */
 *:focus-visible {

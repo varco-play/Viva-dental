@@ -35,9 +35,9 @@ export default function Footer() {
               <Image
                 src="/logo.jpg"
                 alt="Viva Dental Group"
-                width={150}
-                height={44}
-                className="h-11 w-auto object-contain"
+                width={180}
+                height={52}
+                className="h-12 sm:h-14 w-auto object-contain"
               />
             </Link>
             <p className="text-sm leading-relaxed text-slate mb-5">
@@ -125,8 +125,8 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-xl bg-blue-pale flex items-center justify-center flex-shrink-0">
                   <Phone size={14} className="text-blue" />
                 </div>
-                <a href="tel:+998711234567" className="text-sm text-slate hover:text-blue transition-colors">
-                  +998 (71) 123-45-67
+                <a href="tel:+998955030001" className="text-sm text-slate hover:text-blue transition-colors">
+                  +998 (95) 503-00-01
                 </a>
               </li>
               <li className="flex items-center gap-3">

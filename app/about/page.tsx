@@ -35,16 +35,13 @@ export default function AboutPage() {
   return (
     <div ref={ref}>
       {/* Hero */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-navy" />
-        <div className="absolute inset-0 bg-dots opacity-30" />
-        <div className="absolute right-0 top-0 w-96 h-full bg-gradient-to-l from-teal/10 to-transparent" />
+      <section className="relative py-14 overflow-hidden bg-gradient-to-b from-blue-pale to-white border-b border-blue/[0.07]">
         <div className="container-wide relative z-10">
           <div className="tag animate-fade-up"><span className="tag-dot" />О клинике</div>
-          <h1 className="text-5xl md:text-6xl font-black text-white mt-2 mb-4 max-w-2xl animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-5xl md:text-6xl font-bold text-ink mt-2 mb-4 max-w-2xl animate-fade-up" style={{ animationDelay: '0.1s' }}>
             12 лет заботы<br /><span className="text-gradient">о вашей улыбке</span>
           </h1>
-          <p className="text-white/60 text-lg max-w-xl animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-slate text-lg max-w-xl animate-fade-up" style={{ animationDelay: '0.2s' }}>
             Viva Dental Group — это современная многопрофильная стоматологическая клиника, созданная с одной целью: дать каждому пациенту красивую и здоровую улыбку.
           </p>
         </div>

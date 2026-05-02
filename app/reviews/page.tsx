@@ -26,29 +26,27 @@ export default function ReviewsPage() {
   return (
     <div ref={ref}>
       {/* Hero */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-navy" />
-        <div className="absolute inset-0 bg-dots opacity-30" />
+      <section className="relative py-14 overflow-hidden bg-gradient-to-b from-blue-pale to-white border-b border-blue/[0.07]">
         <div className="container-wide relative z-10 text-center">
           <div className="tag justify-center animate-fade-up"><span className="tag-dot" />Отзывы</div>
-          <h1 className="text-5xl md:text-6xl font-black text-white mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-5xl md:text-6xl font-bold text-ink mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Что говорят<br /><span className="text-gradient">наши пациенты</span>
           </h1>
 
           {/* Rating summary */}
           <div className="inline-flex flex-col sm:flex-row items-center gap-6 mt-6 animate-fade-up" style={{ animationDelay: '0.2s' }}>
             <div className="text-center">
-              <div className="text-6xl font-black text-white">4.9</div>
+              <div className="text-6xl font-bold text-blue" style={{ fontFamily: 'var(--font-cormorant)' }}>4.9</div>
               <div className="flex gap-0.5 mt-1 justify-center">
                 {[1,2,3,4,5].map(n => <Star key={n} size={18} className="text-yellow-400 fill-yellow-400" />)}
               </div>
-              <div className="text-white/40 text-sm mt-1">из 5</div>
+              <div className="text-slate text-sm mt-1">из 5</div>
             </div>
-            <div className="w-px h-14 bg-white/10 hidden sm:block" />
+            <div className="w-px h-14 bg-blue/15 hidden sm:block" />
             <div className="text-left">
-              <div className="text-white/70 text-sm">На основе</div>
-              <div className="text-2xl font-black text-white">2000+ отзывов</div>
-              <div className="text-white/40 text-sm">Google · Yandex · 2GIS</div>
+              <div className="text-slate text-sm">На основе</div>
+              <div className="text-2xl font-bold text-ink">2000+ отзывов</div>
+              <div className="text-slate text-sm">Google · Yandex · 2GIS</div>
             </div>
           </div>
         </div>

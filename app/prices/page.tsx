@@ -25,19 +25,16 @@ export default function PricesPage() {
   return (
     <div ref={ref}>
       {/* Hero */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-navy" />
-        <div className="absolute inset-0 bg-dots opacity-30" />
-        <div className="absolute top-10 left-1/3 w-72 h-72 rounded-full bg-teal/10 blur-3xl" />
+      <section className="relative py-14 overflow-hidden bg-gradient-to-b from-blue-pale to-white border-b border-blue/[0.07]">
         <div className="container-wide relative z-10 text-center">
           <div className="tag justify-center animate-fade-up"><span className="tag-dot" />Прайс-лист</div>
-          <h1 className="text-5xl md:text-6xl font-black text-white mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-5xl md:text-6xl font-bold text-ink mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Прозрачные цены<br /><span className="text-gradient">без скрытых доплат</span>
           </h1>
-          <p className="text-white/60 text-lg max-w-xl mx-auto mb-8 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-slate text-lg max-w-xl mx-auto mb-8 animate-fade-up" style={{ animationDelay: '0.2s' }}>
             Точная стоимость определяется после осмотра и составления плана лечения.
           </p>
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-brand/20 border border-green-brand/40 text-green-brand font-semibold text-sm animate-fade-up" style={{ animationDelay: '0.3s' }}>
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue/10 border border-blue/20 text-blue font-semibold text-sm animate-fade-up" style={{ animationDelay: '0.3s' }}>
             <CheckCircle size={16} />
             10% скидка при семейном посещении
           </div>

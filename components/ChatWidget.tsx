@@ -209,7 +209,7 @@ export default function ChatWidget() {
         }
 
         if (!res.ok || !data.message) {
-          setErrorMsg('Не удалось получить ответ. Позвоните нам: +998 (71) 123-45-67')
+          setErrorMsg('Не удалось получить ответ. Позвоните нам: +998 (95) 503-00-01')
           return
         }
 
@@ -219,7 +219,7 @@ export default function ChatWidget() {
         ])
       } catch {
         setErrorMsg(
-          'Нет соединения. Проверьте интернет или позвоните: +998 (71) 123-45-67'
+          'Нет соединения. Проверьте интернет или позвоните: +998 (95) 503-00-01'
         )
       } finally {
         setLoading(false)
@@ -317,7 +317,7 @@ export default function ChatWidget() {
             </div>
             {/* Phone shortcut */}
             <a
-              href="tel:+998711234567"
+              href="tel:+998955030001"
               title="Позвонить"
               style={{
                 color: 'rgba(255,255,255,0.6)',

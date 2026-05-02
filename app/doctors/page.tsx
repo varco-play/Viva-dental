@@ -20,16 +20,13 @@ export default function DoctorsPage() {
   return (
     <div ref={ref}>
       {/* Hero */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-navy" />
-        <div className="absolute inset-0 bg-dots opacity-30" />
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-green-brand/10 blur-3xl" />
+      <section className="relative py-14 overflow-hidden bg-gradient-to-b from-blue-pale to-white border-b border-blue/[0.07]">
         <div className="container-wide relative z-10 text-center">
           <div className="tag justify-center animate-fade-up"><span className="tag-dot" />Наша команда</div>
-          <h1 className="text-5xl md:text-6xl font-black text-white mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-5xl md:text-6xl font-bold text-ink mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Врачи, которым<br /><span className="text-gradient">доверяют пациенты</span>
           </h1>
-          <p className="text-white/60 text-lg max-w-xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-slate text-lg max-w-xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
             Наши специалисты — практикующие эксперты с многолетним опытом и международными сертификатами.
           </p>
         </div>
