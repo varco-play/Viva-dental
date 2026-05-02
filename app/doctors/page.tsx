@@ -11,9 +11,9 @@ export default function DoctorsPage() {
     if (!el) return
     const obs = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
     )
-    el.querySelectorAll('.reveal, .reveal-scale').forEach(e => obs.observe(e))
+    el.querySelectorAll('.reveal').forEach(e => obs.observe(e))
     return () => obs.disconnect()
   }, [])
 
@@ -35,60 +35,79 @@ export default function DoctorsPage() {
       {/* Doctors */}
       <section className="section bg-surface">
         <div className="container-wide">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-6">
             {doctors.map((doc, i) => (
               <div
                 key={doc.id}
-                className="reveal reveal-scale group bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-400 hover:-translate-y-1"
-                style={{ transitionDelay: `${i * 100}ms` }}
+                className="reveal bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5"
+                style={{ transitionDelay: `${i * 80}ms` }}
               >
-                {/* Photo area */}
-                <div className="relative h-52 bg-gradient-to-br from-blue-dark to-blue-mid overflow-hidden">
-                  <div className="absolute inset-0 bg-dots opacity-30" />
-                  {/* Initials as placeholder */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-28 h-28 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/20 flex items-center justify-center">
-                      <span className="text-white text-4xl font-black">
-                        {doc.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2)}
-                      </span>
-                    </div>
-                  </div>
-                  {/* Specialty badge */}
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-semibold">
-                      {doc.specialty}
+                {/* Top strip — initials + name + specialty + experience */}
+                <div className="relative bg-gradient-to-r from-blue-dark to-blue-mid px-6 py-5 flex items-center gap-5">
+                  <div className="absolute inset-0 bg-dots opacity-20" />
+                  {/* Initials circle */}
+                  <div className="relative w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/25 flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-xl font-black">
+                      {doc.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2)}
                     </span>
+                  </div>
+                  {/* Name + meta */}
+                  <div className="relative flex-1 min-w-0">
+                    <h3 className="text-white font-black text-base leading-snug">{doc.name}</h3>
+                    <p className="text-white/70 text-xs mt-0.5">{doc.specialty}</p>
+                    <div className="flex items-center gap-1.5 mt-2">
+                      <Briefcase size={11} className="text-white/50" />
+                      <span className="text-white/60 text-xs">Стаж {doc.experience} лет</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Info */}
-                <div className="p-6">
-                  <h3 className="text-xl font-black text-charcoal mb-1 group-hover:text-teal transition-colors">{doc.name}</h3>
+                {/* Body */}
+                <div className="p-6 space-y-5">
+                  {/* Description */}
+                  <p className="text-slate text-sm leading-relaxed">{doc.description}</p>
 
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    <div className="flex items-center gap-1.5 text-muted text-xs">
-                      <Briefcase size={12} className="text-teal flex-shrink-0" />
-                      <span>Стаж {doc.experience} лет</span>
+                  {/* Specializations — chips */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {doc.specializations.map((s) => (
+                      <span key={s} className="px-2.5 py-1 rounded-full bg-blue/8 text-blue text-xs font-semibold border border-blue/15">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Education */}
+                  <div>
+                    <div className="flex items-center gap-1.5 text-xs font-semibold text-ink uppercase tracking-wider mb-2">
+                      <GraduationCap size={13} className="text-blue" />
+                      Образование
                     </div>
-                    </div>
+                    <ul className="space-y-1 pl-3 border-l-2 border-blue/20">
+                      {doc.education.map((e) => (
+                        <li key={e} className="text-xs text-muted leading-relaxed">{e}</li>
+                      ))}
+                    </ul>
+                  </div>
 
-                  {doc.description && (
-                    <p className="text-muted text-base leading-relaxed mb-4 line-clamp-3">{doc.description}</p>
-                  )}
-
-                  {doc.education && (
-                    <div className="mb-4">
-                      <div className="flex items-center gap-1.5 text-xs text-muted font-semibold uppercase tracking-wider mb-2">
-                        <GraduationCap size={12} className="text-teal" />
-                        Образование
+                  {/* Certifications */}
+                  {doc.certifications.length > 0 && (
+                    <div>
+                      <div className="flex items-center gap-1.5 text-xs font-semibold text-ink uppercase tracking-wider mb-2">
+                        <Award size={13} className="text-blue" />
+                        Квалификация и сертификаты
                       </div>
-                      <p className="text-xs text-muted pl-3 border-l-2 border-teal/30">{doc.education}</p>
+                      <ul className="space-y-1 pl-3 border-l-2 border-blue/20">
+                        {doc.certifications.map((c) => (
+                          <li key={c} className="text-xs text-muted leading-relaxed">{c}</li>
+                        ))}
+                      </ul>
                     </div>
                   )}
 
-                  <PopupButton className="btn-outline text-sm py-2.5 w-full justify-center group-hover:bg-teal group-hover:text-white group-hover:border-teal mt-2">
+                  {/* CTA */}
+                  <PopupButton className="btn-outline text-sm py-2.5 w-full justify-center hover:bg-blue hover:text-white hover:border-blue mt-1">
                     <Phone size={14} />
-                    Записаться
+                    Записаться к врачу
                   </PopupButton>
                 </div>
               </div>
