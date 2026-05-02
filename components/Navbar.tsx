@@ -78,7 +78,7 @@ export default function Navbar() {
               src="/logo.png"
               alt="Viva Dental Group"
               width={220}
-              height={74}
+              height={72}
               className="h-full w-auto object-contain transition-opacity duration-200 group-hover:opacity-90"
               priority
             />
