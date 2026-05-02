@@ -17,13 +17,11 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen]     = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 20)
       const total = document.body.scrollHeight - window.innerHeight
       if (total > 0) setScrollProgress((window.scrollY / total) * 100)
     }
@@ -46,24 +44,15 @@ export default function Navbar() {
         style={{ width: `${scrollProgress}%` }}
       />
 
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${
-          scrolled ? 'shadow-[0_2px_24px_rgba(13,46,106,0.10)]' : 'shadow-[0_1px_0_rgba(26,79,160,0.08)]'
-        }`}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 bg-blue-dark shadow-[0_2px_20px_rgba(10,30,80,0.30)]">
         {/* Top info bar */}
-        <div className="bg-blue-dark text-white/80 text-xs py-2 hidden sm:block">
+        <div className="bg-navy text-white/55 text-xs py-1.5 hidden sm:block border-b border-white/[0.06]">
           <div className="container-wide flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1">
-                <Clock size={11} className="text-blue-light opacity-80" />
-                Пн–Сб: 9:00–21:00 &nbsp;|&nbsp; Вс: 10:00–18:00
-              </span>
-            </div>
-            <a
-              href="tel:+998955030001"
-              className="flex items-center gap-1.5 hover:text-white transition-colors"
-            >
+            <span className="flex items-center gap-1.5">
+              <Clock size={11} className="opacity-50" />
+              Пн–Сб: 9:00–21:00 &nbsp;|&nbsp; Вс: 10:00–18:00
+            </span>
+            <a href="tel:+998955030001" className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone size={11} />
               +998 (95) 503-00-01
             </a>
@@ -71,14 +60,15 @@ export default function Navbar() {
         </div>
 
         {/* Main navigation */}
-        <nav className="container-wide flex items-center justify-between h-16 sm:h-[4.5rem]">
-          {/* Logo */}
-          <Link href="/" className="flex items-stretch flex-shrink-0 group h-full">
+        <nav className="container-wide flex items-center justify-between h-14 sm:h-16">
+          {/* Logo — fixed size, not filling the bar */}
+          <Link href="/" className="flex items-center flex-shrink-0 group">
             <Image
               src="/logo.png"
               alt="Viva Dental Group"
-              height={72}
-              className="h-full w-auto object-contain transition-opacity duration-200 group-hover:opacity-90"
+              width={160}
+              height={44}
+              className="h-9 sm:h-11 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
               priority
             />
           </Link>
@@ -91,13 +81,13 @@ export default function Navbar() {
                   href={link.href}
                   className={`relative px-3 py-2 text-sm font-semibold rounded-lg transition-all duration-200
                     ${pathname === link.href
-                      ? 'text-blue bg-blue-pale'
-                      : 'text-ink hover:text-blue hover:bg-blue-pale/60'
+                      ? 'text-white bg-white/15'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
                     }`}
                 >
                   {link.label}
                   {pathname === link.href && (
-                    <span className="absolute bottom-1 left-3 right-3 h-0.5 rounded-full bg-blue" />
+                    <span className="absolute bottom-1 left-3 right-3 h-0.5 rounded-full bg-white/50" />
                   )}
                 </Link>
               </li>
@@ -108,12 +98,12 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <a
               href="tel:+998955030001"
-              className="flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-blue transition-colors duration-200"
+              className="flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-colors duration-200"
             >
-              <Phone size={15} className="text-blue" />
+              <Phone size={15} className="text-white/40" />
               <span className="hidden xl:block">+998 (95) 503-00-01</span>
             </a>
-            <button onClick={openPopup} className="btn-primary text-sm py-2.5 px-5">
+            <button onClick={openPopup} className="btn-white text-sm py-2.5 px-5">
               Записаться
             </button>
           </div>
@@ -121,7 +111,7 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 rounded-lg text-ink hover:bg-blue-pale transition-all duration-200"
+            className="lg:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-200"
             aria-label="Меню"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
@@ -134,7 +124,7 @@ export default function Navbar() {
             open ? 'max-h-[640px] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="bg-white border-t border-blue-pale shadow-card-hover">
+          <div className="bg-white border-t border-blue/10 shadow-card-hover">
             <div className="container-wide py-4">
               {/* Phone block */}
               <a
@@ -184,8 +174,8 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Spacer: info bar (~2rem on sm+) + main nav (4rem/4.5rem) */}
-      <div className="h-16 sm:h-[calc(2rem+4.5rem)]" id="navbar-spacer" />
+      {/* Spacer */}
+      <div className="h-14 sm:h-[calc(1.75rem+4rem)]" id="navbar-spacer" />
     </>
   )
 }

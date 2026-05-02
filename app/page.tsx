@@ -83,42 +83,42 @@ export default function HomePage() {
     <div ref={sectionRef}>
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[82vh] flex items-center overflow-hidden bg-gradient-navy">
-        <div className="absolute inset-0 bg-dots opacity-25" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-blue/20 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-green/10 blur-3xl pointer-events-none animate-pulse-slow" />
+      <section className="relative min-h-[88vh] flex items-center overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-grid opacity-50" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-blue/5 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-blue/[0.04] blur-3xl pointer-events-none" />
 
         <div className="container-wide relative z-10 py-20">
           <div className="max-w-2xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-semibold mb-8 animate-fade-up">
-              <span className="w-2 h-2 rounded-full bg-green animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue/8 border border-blue/15 text-blue text-sm font-semibold mb-8 animate-fade-up">
+              <span className="w-2 h-2 rounded-full bg-green-brand animate-pulse" />
               Принимаем пациентов без очереди
             </div>
 
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-[1.05] animate-fade-up" style={{ animationDelay: '0.1s' }}>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-ink mb-6 leading-[1.05] animate-fade-up" style={{ animationDelay: '0.1s' }}>
               Красивая улыбка<br />
               <span className="text-gradient">это искусство</span>
             </h1>
 
-            <p className="text-white/70 text-lg md:text-xl mb-10 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: '0.2s' }}>
+            <p className="text-slate text-lg md:text-xl mb-10 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: '0.2s' }}>
               Профессиональная стоматология с заботой о каждом пациенте. Современные технологии, опытные врачи, комфортная атмосфера.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-up" style={{ animationDelay: '0.3s' }}>
-              <PopupButton className="btn-white text-base py-4 px-8">
+              <PopupButton className="btn-primary text-base py-4 px-8">
                 <Calendar size={18} />
                 Записаться на приём
               </PopupButton>
-              <Link href="/services" className="inline-flex items-center gap-2 border-2 border-white/40 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 hover:border-white/70 transition-all duration-300 text-base">
+              <Link href="/services" className="inline-flex items-center gap-2 border-2 border-blue/30 text-blue px-8 py-4 rounded-full font-bold hover:bg-blue hover:text-white hover:border-blue transition-all duration-300 text-base">
                 Наши услуги <ArrowRight size={18} />
               </Link>
             </div>
 
             <div className="flex flex-wrap gap-5 mt-10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
               {['Лицензия МЗ РУз', 'Гарантия на лечение', 'Скидка 10% семьям'].map((b) => (
-                <div key={b} className="flex items-center gap-1.5 text-white/60 text-sm">
-                  <CheckCircle size={14} className="text-green flex-shrink-0" />
+                <div key={b} className="flex items-center gap-1.5 text-muted text-sm">
+                  <CheckCircle size={14} className="text-green-brand flex-shrink-0" />
                   {b}
                 </div>
               ))}
@@ -127,9 +127,9 @@ export default function HomePage() {
         </div>
 
         {/* Scroll hint */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-ink/20 animate-bounce">
           <span className="text-xs tracking-widest font-semibold">SCROLL</span>
-          <div className="w-px h-7 bg-gradient-to-b from-white/30 to-transparent" />
+          <div className="w-px h-7 bg-gradient-to-b from-ink/20 to-transparent" />
         </div>
       </section>
 
