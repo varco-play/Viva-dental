@@ -16,11 +16,7 @@
   h1, h2, h3 {
     @apply font-serif font-bold leading-tight;
     letter-spacing: -0.02em;
-    font-size: clamp(2rem, 5vw, 4rem);
   }
-  h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
-  h2 { font-size: clamp(2rem, 4.5vw, 3.75rem); }
-  h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
   h4, h5, h6 {
     @apply font-sans font-semibold leading-tight;
   }

@@ -40,7 +40,7 @@ export default function ServicesPage() {
       <section className="relative py-14 overflow-hidden bg-gradient-to-b from-blue-pale to-white border-b border-blue/[0.07]">
         <div className="container-wide relative z-10 text-center">
           <div className="tag justify-center animate-fade-up"><span className="tag-dot" />Наши услуги</div>
-          <h1 className="text-6xl md:text-7xl font-bold text-ink mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-ink mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Полный спектр<br /><span className="text-gradient">стоматологических услуг</span>
           </h1>
           <p className="text-slate text-lg max-w-xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>

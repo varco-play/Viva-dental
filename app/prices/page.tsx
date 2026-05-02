@@ -28,7 +28,7 @@ export default function PricesPage() {
       <section className="relative py-14 overflow-hidden bg-gradient-to-b from-blue-pale to-white border-b border-blue/[0.07]">
         <div className="container-wide relative z-10 text-center">
           <div className="tag justify-center animate-fade-up"><span className="tag-dot" />Прайс-лист</div>
-          <h1 className="text-6xl md:text-7xl font-bold text-ink mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-ink mt-2 mb-4 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Прозрачные цены<br /><span className="text-gradient">без скрытых доплат</span>
           </h1>
           <p className="text-slate text-lg max-w-xl mx-auto mb-8 animate-fade-up" style={{ animationDelay: '0.2s' }}>
