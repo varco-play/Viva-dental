@@ -71,7 +71,7 @@ export default function Navbar() {
         </div>
 
         {/* Main navigation */}
-        <nav className="container-wide flex items-center justify-between h-16">
+        <nav className="container-wide flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0 group">
             <Image
@@ -79,7 +79,7 @@ export default function Navbar() {
               alt="Viva Dental Group"
               width={180}
               height={56}
-              className="h-12 sm:h-14 w-auto object-contain transition-opacity duration-200 group-hover:opacity-90"
+              className="h-16 sm:h-20 w-auto object-contain transition-opacity duration-200 group-hover:opacity-90"
               priority
             />
           </Link>
@@ -185,8 +185,8 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Spacer: info bar (~2rem on sm+) + main nav (4rem) */}
-      <div className="h-16 sm:h-[calc(2rem+4rem)]" id="navbar-spacer" />
+      {/* Spacer: info bar (~2rem on sm+) + main nav (5rem) */}
+      <div className="h-20 sm:h-[calc(2rem+5rem)]" id="navbar-spacer" />
     </>
   )
 }

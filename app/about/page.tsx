@@ -38,7 +38,7 @@ export default function AboutPage() {
       <section className="relative py-14 overflow-hidden bg-gradient-to-b from-blue-pale to-white border-b border-blue/[0.07]">
         <div className="container-wide relative z-10">
           <div className="tag animate-fade-up"><span className="tag-dot" />О клинике</div>
-          <h1 className="text-5xl md:text-6xl font-bold text-ink mt-2 mb-4 max-w-2xl animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-6xl md:text-7xl font-bold text-ink mt-2 mb-4 max-w-2xl animate-fade-up" style={{ animationDelay: '0.1s' }}>
             12 лет заботы<br /><span className="text-gradient">о вашей улыбке</span>
           </h1>
           <p className="text-slate text-lg max-w-xl animate-fade-up" style={{ animationDelay: '0.2s' }}>
