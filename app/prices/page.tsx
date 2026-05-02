@@ -11,12 +11,15 @@ export default function PricesPage() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
-      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
-    )
-    el.querySelectorAll('.reveal').forEach(e => obs.observe(e))
-    return () => obs.disconnect()
+    // IntersectionObserver fires asynchronously and is unreliable when content
+    // is swapped by filter clicks — use double rAF so layout settles first
+    let raf2: number
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
+        el.querySelectorAll('.reveal').forEach(e => e.classList.add('visible'))
+      })
+    })
+    return () => { cancelAnimationFrame(raf1); cancelAnimationFrame(raf2) }
   }, [activeCategory])
 
   const categories = priceList.map(p => p.category)
