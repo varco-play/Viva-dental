@@ -97,7 +97,7 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-[1.05] animate-fade-up" style={{ animationDelay: '0.1s' }}>
-              <span className="hidden sm:inline">Красивая улыбка —<br /></span>
+              Красивая улыбка<br />
               <span className="text-gradient">это искусство</span>
             </h1>
 

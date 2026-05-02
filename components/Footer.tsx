@@ -33,11 +33,11 @@ export default function Footer() {
           <div>
             <Link href="/" className="inline-block mb-5">
               <Image
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="Viva Dental Group"
                 width={180}
                 height={52}
-                className="h-12 sm:h-14 w-auto object-contain"
+                className="h-14 sm:h-16 w-auto object-contain"
               />
             </Link>
             <p className="text-sm leading-relaxed text-slate mb-5">
