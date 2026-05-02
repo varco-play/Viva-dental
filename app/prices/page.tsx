@@ -17,7 +17,7 @@ export default function PricesPage() {
     )
     el.querySelectorAll('.reveal').forEach(e => obs.observe(e))
     return () => obs.disconnect()
-  }, [])
+  }, [activeCategory])
 
   const categories = priceList.map(p => p.category)
   const filtered = activeCategory ? priceList.filter(p => p.category === activeCategory) : priceList
