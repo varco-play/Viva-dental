@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { Phone, MapPin, Clock, Send, Instagram } from 'lucide-react'
+import Image from 'next/image'
+import { Phone, MapPin, Clock, Send, Instagram, ArrowRight } from 'lucide-react'
 import PopupButton from '@/components/PopupButton'
 
 const contactCards = [
@@ -103,19 +104,27 @@ export default function ContactsPage() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Map placeholder */}
             <div className="reveal-left">
-              <div className="rounded-3xl overflow-hidden h-80 lg:h-full min-h-[320px] bg-surface border border-gray-100 shadow-card flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-dots" />
-                <div className="relative text-center text-muted">
-                  <MapPin size={48} className="mx-auto mb-3 text-blue/40" />
-                  <div className="font-semibold text-charcoal">Шайхантахурский р-н, Зафаробод 50</div>
-                  <div className="text-sm mt-1">м. Беруний · ост. Орзу</div>
+              <div className="rounded-3xl overflow-hidden h-80 lg:h-full min-h-[320px] relative shadow-card group">
+                <Image
+                  src="/clinicphoto.jpg"
+                  alt="Клиника Viva Dental Group — Зафаробод 50, Ташкент"
+                  fill
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="flex items-center gap-2 text-white font-semibold">
+                    <MapPin size={16} className="text-white/80" />
+                    Шайхантахурский р-н, Зафаробод 50
+                  </div>
                   <a
                     href="https://maps.google.com/?q=Zafarobod+50+Tashkent"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-blue text-sm font-semibold mt-3 hover:underline"
+                    className="inline-flex items-center gap-1.5 text-white/70 text-sm mt-1 hover:text-white transition-colors"
                   >
-                    Открыть на Google Maps <ArrowRight size={14} />
+                    Открыть на Google Maps <ArrowRight size={13} />
                   </a>
                 </div>
               </div>

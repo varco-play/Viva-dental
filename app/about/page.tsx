@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { CheckCircle, Award, Heart, Users, Shield, Sparkles } from 'lucide-react'
+import Image from 'next/image'
+import { CheckCircle, Award, Heart, Users, Shield } from 'lucide-react'
 import PopupButton from '@/components/PopupButton'
 
 const values = [
@@ -133,12 +134,14 @@ export default function AboutPage() {
               </ul>
             </div>
             <div className="relative reveal-right">
-              <div className="rounded-3xl overflow-hidden bg-gradient-navy h-80 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-dots opacity-30" />
-                <div className="relative text-center text-white/30 text-sm">
-                  <Sparkles size={48} className="mx-auto mb-3 text-teal/50" />
-                  Фото клиники
-                </div>
+              <div className="rounded-3xl overflow-hidden h-80 relative shadow-card-hover">
+                <Image
+                  src="/clinicphoto.jpg"
+                  alt="Клиника Viva Dental Group — фасад здания"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-card-hover p-5">
                 <div className="text-3xl font-black text-teal">3D</div>
