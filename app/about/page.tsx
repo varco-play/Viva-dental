@@ -133,7 +133,7 @@ export default function AboutPage() {
                 ))}
               </ul>
             </div>
-            <div className="relative reveal-right">
+            <div className="reveal-right">
               <div className="rounded-3xl overflow-hidden h-80 relative shadow-card-hover">
                 <Image
                   src="/clinicphoto.jpg"
@@ -142,10 +142,6 @@ export default function AboutPage() {
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-              </div>
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-card-hover p-5">
-                <div className="text-3xl font-black text-teal">3D</div>
-                <div className="text-xs text-muted mt-1">КТ MORITA X800<br />ежедневно 9–22</div>
               </div>
             </div>
           </div>
