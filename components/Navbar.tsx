@@ -68,7 +68,7 @@ export default function Navbar() {
               alt="Viva Dental Group"
               width={160}
               height={44}
-              className="h-9 sm:h-11 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
+              className="h-9 sm:h-11 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80 rounded-xl"
               priority
             />
           </Link>
