@@ -44,16 +44,16 @@ export default function Navbar() {
         style={{ width: `${scrollProgress}%` }}
       />
 
-      <header className="fixed top-0 left-0 right-0 z-50 bg-blue-dark shadow-[0_2px_20px_rgba(10,30,80,0.30)]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-[0_2px_16px_rgba(0,0,0,0.08)] border-b border-gray-100">
         {/* Top info bar */}
-        <div className="bg-navy text-white/55 text-xs py-1.5 hidden sm:block border-b border-white/[0.06]">
+        <div className="bg-gray-50 text-slate text-xs py-1.5 hidden sm:block border-b border-gray-100">
           <div className="container-wide flex items-center justify-between">
             <span className="flex items-center gap-1.5">
-              <Clock size={11} className="opacity-50" />
+              <Clock size={11} className="text-blue/50" />
               Пн–Вс: 10:00–19:00 &nbsp;|&nbsp; Последняя запись в 18:00
             </span>
-            <a href="tel:+998955030001" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={11} />
+            <a href="tel:+998955030001" className="flex items-center gap-1.5 hover:text-blue transition-colors font-medium">
+              <Phone size={11} className="text-blue/60" />
               +998 (95) 503-00-01
             </a>
           </div>
@@ -61,14 +61,14 @@ export default function Navbar() {
 
         {/* Main navigation */}
         <nav className="container-wide flex items-center justify-between h-14 sm:h-16">
-          {/* Logo — fixed size, not filling the bar */}
+          {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0 group">
             <Image
               src="/logo.png"
               alt="Viva Dental Group"
               width={200}
               height={94}
-              className="h-10 sm:h-12 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
+              className="h-10 sm:h-12 w-auto object-contain transition-opacity duration-200 group-hover:opacity-75"
               priority
             />
           </Link>
@@ -81,13 +81,13 @@ export default function Navbar() {
                   href={link.href}
                   className={`relative px-3 py-2 text-sm font-semibold rounded-lg transition-all duration-200
                     ${pathname === link.href
-                      ? 'text-white bg-white/15'
-                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                      ? 'text-blue bg-blue/8'
+                      : 'text-slate hover:text-blue hover:bg-blue/5'
                     }`}
                 >
                   {link.label}
                   {pathname === link.href && (
-                    <span className="absolute bottom-1 left-3 right-3 h-0.5 rounded-full bg-white/50" />
+                    <span className="absolute bottom-1 left-3 right-3 h-0.5 rounded-full bg-blue/40" />
                   )}
                 </Link>
               </li>
@@ -98,12 +98,12 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <a
               href="tel:+998955030001"
-              className="flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-colors duration-200"
+              className="flex items-center gap-1.5 text-sm font-semibold text-slate hover:text-blue transition-colors duration-200"
             >
-              <Phone size={15} className="text-white/40" />
+              <Phone size={15} className="text-blue/50" />
               <span className="hidden xl:block">+998 (95) 503-00-01</span>
             </a>
-            <button onClick={openPopup} className="btn-white text-sm py-2.5 px-5">
+            <button onClick={openPopup} className="btn-primary text-sm py-2.5 px-5">
               Записаться
             </button>
           </div>
@@ -111,7 +111,7 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-200"
+            className="lg:hidden p-2 rounded-lg text-slate hover:bg-gray-100 transition-all duration-200"
             aria-label="Меню"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
