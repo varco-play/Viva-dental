@@ -46,7 +46,7 @@ export default function Footer() {
             {/* Social icons */}
             <div className="flex gap-2.5">
               <a
-                href="https://instagram.com/VIVA_DENTAL_GROUP_Huvaydo"
+                href="https://www.instagram.com/viva_dental_clinics/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"

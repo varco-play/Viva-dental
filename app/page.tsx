@@ -7,6 +7,7 @@ import {
   Wind, Syringe, MessageSquare, type LucideIcon,
 } from 'lucide-react'
 import PopupButton from '@/components/PopupButton'
+import HomePreloader from '@/components/HomePreloader'
 
 function Counter({ end, suffix = '', duration = 2000 }: { end: number; suffix?: string; duration?: number }) {
   const [count, setCount] = useState(0)
@@ -81,6 +82,7 @@ export default function HomePage() {
 
   return (
     <div ref={sectionRef}>
+      <HomePreloader />
 
       {/* ── HERO ── */}
       <section className="relative min-h-[88vh] flex items-center overflow-hidden bg-white">
@@ -96,8 +98,8 @@ export default function HomePage() {
               Принимаем пациентов без очереди
             </div>
 
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-ink mb-6 leading-[1.05] animate-fade-up" style={{ animationDelay: '0.1s' }}>
-              Красивая улыбка<br />
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.05] animate-fade-up" style={{ animationDelay: '0.1s' }}>
+              <span className="text-gradient-navy">Красивая улыбка</span><br />
               <span className="text-gradient">это искусство</span>
             </h1>
 

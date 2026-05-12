@@ -25,10 +25,10 @@ const contactCards = [
   },
   {
     icon: Instagram,
-    title: 'Instagram / Telegram',
+    title: 'Instagram',
     value: '@VIVA_DENTAL_GROUP',
     sub: '@Viva3D — 3D КТ-диагностика',
-    href: 'https://instagram.com/VIVA_DENTAL_GROUP_Huvaydo',
+    href: 'https://www.instagram.com/viva_dental_clinics/',
     color: 'bg-navy',
     external: true,
   },
@@ -179,8 +179,8 @@ export default function ContactsPage() {
                   <h3 className="font-bold text-charcoal">Социальные сети</h3>
                 </div>
                 <div className="pl-10 space-y-1.5">
-                  <a href="https://instagram.com/VIVA_DENTAL_GROUP_Huvaydo" target="_blank" rel="noopener noreferrer" className="block text-sm text-blue hover:underline font-medium">
-                    Instagram / Telegram: @VIVA_DENTAL_GROUP_Huvaydo
+                  <a href="https://www.instagram.com/viva_dental_clinics/" target="_blank" rel="noopener noreferrer" className="block text-sm text-blue hover:underline font-medium">
+                    Instagram: @viva_dental_clinics
                   </a>
                   <a href="https://t.me/Viva3D" target="_blank" rel="noopener noreferrer" className="block text-sm text-blue hover:underline font-medium">
                     Telegram 3D КТ: @Viva3D
