@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             alt=""
             width={600}
             height={283}
-            className="w-[80vw] sm:w-[55vw] max-w-[520px] h-auto opacity-[0.055]"
+            className="w-[80vw] sm:w-[55vw] max-w-[520px] h-auto opacity-[0.12]"
           />
         </div>
 
