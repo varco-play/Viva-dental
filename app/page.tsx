@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   ArrowRight, Shield, Clock, Award, Star, ChevronRight, Phone, Calendar,
   Users, Stethoscope, Sparkles, CheckCircle, Smile, Scissors, MinusCircle,
@@ -89,6 +90,17 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-grid opacity-50" />
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-blue/5 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-blue/[0.04] blur-3xl pointer-events-none" />
+
+        {/* Decorative logo — right side, visible on md+ */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[44%] xl:w-[40%] pointer-events-none select-none hidden md:flex items-center justify-end pr-8 lg:pr-16" aria-hidden>
+          <Image
+            src="/logo.png"
+            alt=""
+            width={560}
+            height={264}
+            className="w-full h-auto opacity-[0.07]"
+          />
+        </div>
 
         <div className="container-wide relative z-10 py-20">
           <div className="max-w-2xl">

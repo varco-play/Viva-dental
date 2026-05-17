@@ -5,15 +5,20 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Phone, ChevronRight, Clock } from 'lucide-react'
 
-const navLinks = [
+const navLinksLeft = [
   { href: '/',         label: 'Главная' },
   { href: '/about',    label: 'О клинике' },
   { href: '/doctors',  label: 'Врачи' },
   { href: '/services', label: 'Услуги' },
+]
+
+const navLinksRight = [
   { href: '/prices',   label: 'Цены' },
   { href: '/reviews',  label: 'Отзывы' },
   { href: '/contacts', label: 'Контакты' },
 ]
+
+const allNavLinks = [...navLinksLeft, ...navLinksRight]
 
 export default function Navbar() {
   const [open, setOpen]     = useState(false)
@@ -35,6 +40,22 @@ export default function Navbar() {
     window.dispatchEvent(new CustomEvent('open-inquiry-popup'))
     setOpen(false)
   }
+
+  const NavLink = ({ href, label }: { href: string; label: string }) => (
+    <Link
+      href={href}
+      className={`relative px-3 py-2 text-sm font-semibold rounded-lg transition-all duration-200
+        ${pathname === href
+          ? 'text-blue bg-blue/8'
+          : 'text-slate hover:text-blue hover:bg-blue/5'
+        }`}
+    >
+      {label}
+      {pathname === href && (
+        <span className="absolute bottom-1 left-3 right-3 h-0.5 rounded-full bg-blue/40" />
+      )}
+    </Link>
+  )
 
   return (
     <>
@@ -59,10 +80,19 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Main navigation */}
-        <nav className="container-wide flex items-center justify-between h-14 sm:h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center flex-shrink-0 group">
+        {/* ── Desktop navigation — 3-column centered logo ── */}
+        <nav className="container-wide h-14 sm:h-16 hidden lg:grid grid-cols-[1fr_auto_1fr] items-center">
+          {/* Left links */}
+          <ul className="flex items-center gap-0.5">
+            {navLinksLeft.map((link) => (
+              <li key={link.href}>
+                <NavLink href={link.href} label={link.label} />
+              </li>
+            ))}
+          </ul>
+
+          {/* Center — Logo */}
+          <Link href="/" className="flex items-center justify-center mx-6 group">
             <Image
               src="/logo.png"
               alt="Viva Dental Group"
@@ -73,50 +103,62 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop navigation links */}
-          <ul className="hidden lg:flex items-center gap-0.5">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`relative px-3 py-2 text-sm font-semibold rounded-lg transition-all duration-200
-                    ${pathname === link.href
-                      ? 'text-blue bg-blue/8'
-                      : 'text-slate hover:text-blue hover:bg-blue/5'
-                    }`}
-                >
-                  {link.label}
-                  {pathname === link.href && (
-                    <span className="absolute bottom-1 left-3 right-3 h-0.5 rounded-full bg-blue/40" />
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            <a
-              href="tel:+998955030001"
-              className="flex items-center gap-1.5 text-sm font-semibold text-slate hover:text-blue transition-colors duration-200"
-            >
-              <Phone size={15} className="text-blue/50" />
-              <span className="hidden xl:block">+998 (95) 503-00-01</span>
-            </a>
-            <button onClick={openPopup} className="btn-primary text-sm py-2.5 px-5">
-              Записаться
-            </button>
+          {/* Right — links + CTA */}
+          <div className="flex items-center justify-end gap-0.5">
+            <ul className="flex items-center gap-0.5">
+              {navLinksRight.map((link) => (
+                <li key={link.href}>
+                  <NavLink href={link.href} label={link.label} />
+                </li>
+              ))}
+            </ul>
+            <div className="flex items-center gap-3 ml-4">
+              <a
+                href="tel:+998955030001"
+                className="flex items-center gap-1.5 text-sm font-semibold text-slate hover:text-blue transition-colors duration-200"
+              >
+                <Phone size={15} className="text-blue/50" />
+                <span className="hidden xl:block">+998 (95) 503-00-01</span>
+              </a>
+              <button onClick={openPopup} className="btn-primary text-sm py-2.5 px-5">
+                Записаться
+              </button>
+            </div>
           </div>
+        </nav>
 
-          {/* Mobile menu button */}
+        {/* ── Mobile navigation ── */}
+        <div className="lg:hidden flex items-center h-14 sm:h-16 px-4 relative">
+          {/* Hamburger — left */}
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 rounded-lg text-slate hover:bg-gray-100 transition-all duration-200"
+            className="p-2 rounded-lg text-slate hover:bg-gray-100 transition-all duration-200 z-10"
             aria-label="Меню"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
-        </nav>
+
+          {/* Logo — absolutely centered */}
+          <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center group">
+            <Image
+              src="/logo.png"
+              alt="Viva Dental Group"
+              width={200}
+              height={94}
+              className="h-9 sm:h-11 w-auto object-contain transition-opacity duration-200 group-hover:opacity-75"
+              priority
+            />
+          </Link>
+
+          {/* Phone — right */}
+          <a
+            href="tel:+998955030001"
+            className="ml-auto z-10 p-2 rounded-lg text-blue hover:bg-blue/5 transition-all duration-200"
+            aria-label="Позвонить"
+          >
+            <Phone size={20} />
+          </a>
+        </div>
 
         {/* Mobile dropdown */}
         <div
@@ -141,7 +183,7 @@ export default function Navbar() {
               </a>
 
               <ul className="flex flex-col">
-                {navLinks.map((link, i) => (
+                {allNavLinks.map((link, i) => (
                   <li
                     key={link.href}
                     style={{ animationDelay: `${i * 40}ms` }}
