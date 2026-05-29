@@ -86,7 +86,7 @@ export default function HomePage() {
       <HomePreloader />
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[88vh] flex items-center overflow-hidden bg-white">
+      <section className="relative min-h-[88vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50" />
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-blue/5 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-blue/[0.04] blur-3xl pointer-events-none" />
@@ -216,7 +216,7 @@ export default function HomePage() {
               <Link
                 key={s.title}
                 href="/services"
-                className="reveal group relative z-[2] overflow-hidden rounded-2xl border border-gray-100 bg-white p-6
+                className="reveal group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6
                   hover:border-blue/30 hover:shadow-blue transition-all duration-300 hover:-translate-y-1"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
@@ -238,7 +238,7 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA BANNER ── */}
-      <section className="section relative overflow-hidden z-[2]">
+      <section className="section relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-dots opacity-15" />
         <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/5 blur-3xl" />

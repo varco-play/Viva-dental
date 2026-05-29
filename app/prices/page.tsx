@@ -83,7 +83,7 @@ export default function PricesPage() {
                 <div className="w-1.5 h-7 rounded-full bg-gradient-teal" />
                 <h2 className="text-xl font-black text-charcoal">{section.category}</h2>
               </div>
-              <div className="bg-white rounded-2xl overflow-hidden shadow-card border border-gray-50 relative z-[2]">
+              <div className="bg-white rounded-2xl overflow-hidden shadow-card border border-gray-50 relative">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-navy">
@@ -130,7 +130,7 @@ export default function PricesPage() {
       </section>
 
       {/* CTA */}
-      <section className="section relative overflow-hidden z-[2]">
+      <section className="section relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-dots opacity-20" />
         <div className="container-wide relative z-10 text-center">

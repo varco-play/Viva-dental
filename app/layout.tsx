@@ -34,9 +34,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {/* Global background logo watermark — fixed, all pages */}
         <div
-          className="fixed inset-0 flex items-center justify-center pointer-events-none select-none z-[1]"
+          className="fixed inset-0 flex items-center justify-center pointer-events-none select-none z-0"
           aria-hidden="true"
-          style={{ mixBlendMode: 'multiply' }}
         >
           <Image
             src="/logo.png"

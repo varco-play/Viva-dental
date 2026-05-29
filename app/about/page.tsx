@@ -77,7 +77,7 @@ export default function AboutPage() {
               ].map((s, i) => (
                 <div
                   key={s.label}
-                  className={`${s.color} rounded-3xl p-6 text-white reveal z-[2]`}
+                  className={`${s.color} rounded-3xl p-6 text-white reveal`}
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
                   <div className="text-3xl font-black mb-1">{s.num}</div>
@@ -149,7 +149,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="section relative overflow-hidden z-[2]">
+      <section className="section relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-dots opacity-20" />
         <div className="container-wide relative z-10 text-center">
