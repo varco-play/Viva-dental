@@ -57,7 +57,7 @@ export default function AboutPage() {
               <h2 className="section-title reveal delay-100">Клиника, которой<br />доверяют семьи</h2>
               <div className="space-y-4 text-muted leading-relaxed reveal delay-200">
                 <p>Viva Dental Group основана 1 сентября 2016 года главным врачом Рашитходжаевым Саидхожой Набиходжаевичем с единой миссией — сделать профессиональную стоматологическую помощь доступной и комфортной для каждого.</p>
-                <p>За 10 лет работы клиника приняла более 150 000 пациентов и выросла до сети из двух современных филиалов в Ташкенте, оснащённых передовым оборудованием, включая 3D КТ-рентген MORITA X800.</p>
+                <p>За 10 лет работы клиника приняла более 50 000 пациентов и выросла до сети из двух современных филиалов в Ташкенте, оснащённых передовым оборудованием, включая 3D КТ-рентген MORITA X800.</p>
                 <p>Сегодня Viva Dental Group — это команда опытных специалистов с международными сертификатами, атмосфера заботы и высокие стандарты лечения, благодаря которым даже самые тревожные пациенты чувствуют себя спокойно.</p>
               </div>
               <div className="mt-6 reveal delay-300">
@@ -71,13 +71,13 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 gap-5">
               {[
                 { num: '10+', label: 'лет на рынке', color: 'bg-gradient-teal' },
-                { num: '150 000+', label: 'пациентов', color: 'bg-navy' },
+                { num: '50 000+', label: 'пациентов', color: 'bg-navy' },
                 { num: '2', label: 'филиала в Ташкенте', color: 'bg-navy' },
                 { num: '98%', label: 'довольны результатом', color: 'bg-gradient-teal' },
               ].map((s, i) => (
                 <div
                   key={s.label}
-                  className={`${s.color} rounded-3xl p-6 text-white reveal`}
+                  className={`${s.color} rounded-3xl p-6 text-white reveal isolate`}
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
                   <div className="text-3xl font-black mb-1">{s.num}</div>
@@ -102,7 +102,7 @@ export default function AboutPage() {
               return (
                 <div key={v.title} className="reveal group" style={{ transitionDelay: `${i * 100}ms` }}>
                   <div className="card h-full group-hover:border-teal/30">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-full bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <Icon size={22} className="text-white" />
                     </div>
                     <h3 className="font-bold text-charcoal text-lg mb-2">{v.title}</h3>
@@ -149,7 +149,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="section relative overflow-hidden">
+      <section className="section relative overflow-hidden isolate">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-dots opacity-20" />
         <div className="container-wide relative z-10 text-center">

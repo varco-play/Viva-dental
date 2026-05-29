@@ -39,7 +39,7 @@ function Counter({ end, suffix = '', duration = 2000 }: { end: number; suffix?: 
 
 const stats = [
   { end: 10,      suffix: '+', label: 'Лет опыта',           icon: Award },
-  { end: 150000,  suffix: '+', label: 'Пациентов',            icon: Users },
+  { end: 50000,   suffix: '+', label: 'Пациентов',            icon: Users },
   { end: 2,       suffix: '',  label: 'Филиала в Ташкенте',   icon: Stethoscope },
   { end: 98,      suffix: '%', label: 'Довольны результатом', icon: Star },
 ]
@@ -107,7 +107,7 @@ export default function HomePage() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue/8 border border-blue/15 text-blue text-sm font-semibold mb-8 animate-fade-up">
               <span className="w-2 h-2 rounded-full bg-green-brand animate-pulse" />
-              Принимаем пациентов без очереди
+              С заботой о каждом пациенте
             </div>
 
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.05] animate-fade-up" style={{ animationDelay: '0.1s' }}>
@@ -156,7 +156,7 @@ export default function HomePage() {
               const Icon = stat.icon
               return (
                 <div key={stat.label} className="reveal text-center group" style={{ transitionDelay: `${i * 100}ms` }}>
-                  <div className="w-14 h-14 rounded-2xl bg-blue-pale flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:bg-blue group-hover:text-white transition-all duration-300">
+                  <div className="w-14 h-14 rounded-full bg-blue-pale flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:bg-blue group-hover:text-white transition-all duration-300">
                     <Icon size={24} className="text-blue group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div className="text-4xl font-black text-blue mb-1">
@@ -186,7 +186,7 @@ export default function HomePage() {
               return (
                 <div key={f.title} className="reveal group" style={{ transitionDelay: `${i * 100}ms` }}>
                   <div className="card h-full hover:border-blue/20">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-full bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <Icon size={22} className="text-white" />
                     </div>
                     <h3 className="font-bold text-ink mb-2 text-xl">{f.title}</h3>
@@ -216,13 +216,13 @@ export default function HomePage() {
               <Link
                 key={s.title}
                 href="/services"
-                className="reveal group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6
+                className="reveal isolate group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6
                   hover:border-blue/30 hover:shadow-blue transition-all duration-300 hover:-translate-y-1"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 <div className="absolute top-0 right-0 w-28 h-28 bg-blue-pale rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500 opacity-60" />
                 <div className="relative">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 rounded-full bg-gradient-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <s.Icon size={22} className="text-white" />
                   </div>
                   <h3 className="font-bold text-ink text-xl mb-1 group-hover:text-blue transition-colors">{s.title}</h3>
@@ -238,7 +238,7 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA BANNER ── */}
-      <section className="section relative overflow-hidden">
+      <section className="section relative overflow-hidden isolate">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-dots opacity-15" />
         <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
@@ -279,12 +279,12 @@ export default function HomePage() {
               <div className="flex">
                 {[1,2,3,4,5].map(n => <Star key={n} size={18} className="text-yellow-400 fill-yellow-400" />)}
               </div>
-              <span className="text-slate text-sm font-medium">4.9 из 5 · 2000+ отзывов</span>
+              <span className="text-slate text-sm font-medium">4.9 из 5 · 300+ отзывов</span>
             </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
-              <div key={t.name} className="reveal card flex flex-col gap-4 hover:border-blue/20" style={{ transitionDelay: `${i * 100}ms` }}>
+              <div key={t.name} className="reveal card isolate flex flex-col gap-4 hover:border-blue/20" style={{ transitionDelay: `${i * 100}ms` }}>
                 <div className="flex gap-0.5">
                   {[1,2,3,4,5].map(n => (
                     <Star key={n} size={14} className={n <= t.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-200'} />
@@ -302,11 +302,6 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="text-center mt-10 reveal delay-200">
-            <Link href="/reviews" className="btn-outline">
-              Все отзывы <ArrowRight size={16} />
-            </Link>
           </div>
         </div>
       </section>

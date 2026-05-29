@@ -7,7 +7,6 @@ const navLinks = [
   { href: '/doctors',  label: 'Наши врачи' },
   { href: '/services', label: 'Услуги' },
   { href: '/prices',   label: 'Прайс-лист' },
-  { href: '/reviews',  label: 'Отзывы' },
   { href: '/contacts', label: 'Контакты' },
 ]
 
@@ -22,7 +21,7 @@ const serviceLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-surface text-ink relative overflow-hidden border-t border-blue-pale">
+    <footer className="bg-surface text-ink relative overflow-hidden border-t border-blue-pale isolate">
       {/* Top accent line */}
       <div className="h-1 w-full bg-gradient-teal" />
 

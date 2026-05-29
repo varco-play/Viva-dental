@@ -7,3 +7,4 @@ node_modules/
 .claude/
 *.pages
 ЗАПРОС_КОНТЕНТА.md
+.vercel

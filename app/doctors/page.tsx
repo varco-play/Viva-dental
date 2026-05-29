@@ -39,14 +39,14 @@ export default function DoctorsPage() {
             {doctors.map((doc, i) => (
               <div
                 key={doc.id}
-                className="reveal bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5"
+                className="reveal isolate bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 {/* Top strip — initials + name + specialty + experience */}
                 <div className="relative bg-gradient-to-r from-blue-dark to-blue-mid px-6 py-5 flex items-center gap-5">
                   <div className="absolute inset-0 bg-dots opacity-20" />
                   {/* Initials circle */}
-                  <div className="relative w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/25 flex items-center justify-center flex-shrink-0">
+                  <div className="relative w-16 h-16 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 flex items-center justify-center flex-shrink-0">
                     <span className="text-white text-xl font-black">
                       {doc.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2)}
                     </span>
@@ -117,7 +117,7 @@ export default function DoctorsPage() {
       </section>
 
       {/* CTA */}
-      <section className="section relative overflow-hidden">
+      <section className="section relative overflow-hidden isolate">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-dots opacity-20" />
         <div className="container-wide relative z-10 text-center">

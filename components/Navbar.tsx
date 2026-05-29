@@ -14,7 +14,6 @@ const navLinksLeft = [
 
 const navLinksRight = [
   { href: '/prices',   label: 'Цены' },
-  { href: '/reviews',  label: 'Отзывы' },
   { href: '/contacts', label: 'Контакты' },
 ]
 
