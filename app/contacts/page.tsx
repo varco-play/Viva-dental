@@ -80,7 +80,7 @@ export default function ContactsPage() {
                   href={card.href}
                   target={card.external ? '_blank' : undefined}
                   rel={card.external ? 'noopener noreferrer' : undefined}
-                  className="reveal isolate group bg-white rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
+                  className="reveal group z-[2] bg-white rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 flex items-start gap-4"
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
                   <div className={`${card.color} w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
@@ -189,7 +189,7 @@ export default function ContactsPage() {
               </div>
 
               {/* CTA */}
-              <div className="bg-surface rounded-2xl p-5 isolate">
+              <div className="bg-surface rounded-2xl p-5 relative z-[2]">
                 <div className="font-bold text-charcoal mb-1">Запишитесь прямо сейчас</div>
                 <p className="text-muted text-sm mb-4">Оставьте заявку или напишите в Telegram — подберём удобное время.</p>
                 <div className="flex flex-col sm:flex-row gap-3">

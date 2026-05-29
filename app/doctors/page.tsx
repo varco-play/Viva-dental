@@ -39,7 +39,7 @@ export default function DoctorsPage() {
             {doctors.map((doc, i) => (
               <div
                 key={doc.id}
-                className="reveal isolate bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5"
+                className="reveal z-[2] bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 {/* Top strip — initials + name + specialty + experience */}
@@ -117,7 +117,7 @@ export default function DoctorsPage() {
       </section>
 
       {/* CTA */}
-      <section className="section relative overflow-hidden isolate">
+      <section className="section relative overflow-hidden z-[2]">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-dots opacity-20" />
         <div className="container-wide relative z-10 text-center">

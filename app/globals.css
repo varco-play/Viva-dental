@@ -62,14 +62,14 @@
   /* ── Cards ── */
   .card {
     @apply bg-white rounded-2xl shadow-card border border-gray-100/80 p-6
-           hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5 isolate;
+           hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5 relative z-[2];
   }
   .card-navy {
-    @apply bg-blue-dark rounded-2xl p-6 text-white transition-all duration-300 hover:-translate-y-1 isolate;
+    @apply bg-blue-dark rounded-2xl p-6 text-white transition-all duration-300 hover:-translate-y-1 relative z-[2];
   }
   .card-gradient {
     @apply rounded-2xl p-6 text-white bg-gradient-teal transition-all duration-300
-           hover:-translate-y-1 shadow-blue hover:shadow-blue-lg isolate;
+           hover:-translate-y-1 shadow-blue hover:shadow-blue-lg relative z-[2];
   }
 
   /* ── Layout ── */

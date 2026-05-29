@@ -216,7 +216,7 @@ export default function HomePage() {
               <Link
                 key={s.title}
                 href="/services"
-                className="reveal isolate group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6
+                className="reveal group relative z-[2] overflow-hidden rounded-2xl border border-gray-100 bg-white p-6
                   hover:border-blue/30 hover:shadow-blue transition-all duration-300 hover:-translate-y-1"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
@@ -238,7 +238,7 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA BANNER ── */}
-      <section className="section relative overflow-hidden isolate">
+      <section className="section relative overflow-hidden z-[2]">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-dots opacity-15" />
         <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
@@ -284,7 +284,7 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
-              <div key={t.name} className="reveal card isolate flex flex-col gap-4 hover:border-blue/20" style={{ transitionDelay: `${i * 100}ms` }}>
+              <div key={t.name} className="reveal card flex flex-col gap-4 hover:border-blue/20" style={{ transitionDelay: `${i * 100}ms` }}>
                 <div className="flex gap-0.5">
                   {[1,2,3,4,5].map(n => (
                     <Star key={n} size={14} className={n <= t.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-200'} />

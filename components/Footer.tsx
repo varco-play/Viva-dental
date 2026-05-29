@@ -21,7 +21,7 @@ const serviceLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-surface text-ink relative overflow-hidden border-t border-blue-pale isolate">
+    <footer className="bg-surface text-ink relative overflow-hidden border-t border-blue-pale relative z-[2]">
       {/* Top accent line */}
       <div className="h-1 w-full bg-gradient-teal" />
 
