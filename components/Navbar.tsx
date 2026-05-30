@@ -20,15 +20,19 @@ const navLinksRight = [
 const allNavLinks = [...navLinksLeft, ...navLinksRight]
 
 export default function Navbar() {
-  const [open, setOpen]     = useState(false)
+  const [open, setOpen]               = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [scrolled, setScrolled]       = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => {
       const total = document.body.scrollHeight - window.innerHeight
       if (total > 0) setScrollProgress((window.scrollY / total) * 100)
+      setScrolled(window.scrollY > 12)
     }
+    // Run once on mount so SSR/hydration state is correct
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -64,10 +68,16 @@ export default function Navbar() {
         style={{ width: `${scrollProgress}%` }}
       />
 
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-[0_2px_16px_rgba(0,0,0,0.08)] border-b border-gray-100">
-        {/* Top info bar */}
-        <div className="bg-gray-50 text-slate text-xs py-1.5 hidden sm:block border-b border-gray-100">
-          <div className="container-wide flex items-center justify-between">
+      <header className={`fixed top-0 left-0 right-0 z-50 bg-white border-b transition-all duration-300 ${
+        scrolled
+          ? 'shadow-[0_2px_16px_rgba(0,0,0,0.08)] border-gray-100'
+          : 'shadow-[0_1px_4px_rgba(0,0,0,0.04)] border-gray-100/60'
+      }`}>
+        {/* Top info bar — desktop only */}
+        <div className={`bg-gray-50 text-slate text-xs border-b border-gray-100 hidden sm:block overflow-hidden transition-all duration-300 ${
+          scrolled ? 'max-h-10 opacity-100' : 'max-h-10 opacity-100'
+        }`}>
+          <div className="container-wide flex items-center justify-between py-1.5">
             <span className="flex items-center gap-1.5">
               <Clock size={11} className="text-blue/50" />
               Пн–Вс: 10:00–19:00 &nbsp;|&nbsp; Последняя запись в 18:00
@@ -80,7 +90,9 @@ export default function Navbar() {
         </div>
 
         {/* ── Desktop navigation — 3-column centered logo ── */}
-        <nav className="container-wide h-14 sm:h-16 hidden lg:grid grid-cols-[1fr_auto_1fr] items-center">
+        <nav className={`container-wide hidden lg:grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-300 ${
+          scrolled ? 'h-16' : 'h-20'
+        }`}>
           {/* Left links */}
           <ul className="flex items-center gap-0.5">
             {navLinksLeft.map((link) => (
@@ -97,7 +109,9 @@ export default function Navbar() {
               alt="Viva Dental Group"
               width={200}
               height={94}
-              className="h-10 sm:h-12 w-auto object-contain transition-opacity duration-200 group-hover:opacity-75"
+              className={`w-auto object-contain transition-all duration-300 group-hover:opacity-75 ${
+                scrolled ? 'h-12' : 'h-16'
+              }`}
               priority
             />
           </Link>
@@ -119,7 +133,9 @@ export default function Navbar() {
                 <Phone size={15} className="text-blue/50" />
                 <span className="hidden xl:block">+998 (95) 503-00-01</span>
               </a>
-              <button onClick={openPopup} className="btn-primary text-sm py-2.5 px-5">
+              <button onClick={openPopup} className={`btn-primary transition-all duration-300 ${
+                scrolled ? 'text-sm py-2.5 px-5' : 'text-base py-3 px-6'
+              }`}>
                 Записаться
               </button>
             </div>
@@ -127,7 +143,9 @@ export default function Navbar() {
         </nav>
 
         {/* ── Mobile navigation ── */}
-        <div className="lg:hidden flex items-center h-14 sm:h-16 px-4 relative">
+        <div className={`lg:hidden flex items-center px-4 relative transition-all duration-300 ${
+          scrolled ? 'h-14' : 'h-20'
+        }`}>
           {/* Hamburger — left */}
           <button
             onClick={() => setOpen(!open)}
@@ -144,7 +162,9 @@ export default function Navbar() {
               alt="Viva Dental Group"
               width={200}
               height={94}
-              className="h-9 sm:h-11 w-auto object-contain transition-opacity duration-200 group-hover:opacity-75"
+              className={`w-auto object-contain transition-all duration-300 group-hover:opacity-75 ${
+                scrolled ? 'h-9' : 'h-14'
+              }`}
               priority
             />
           </Link>
@@ -215,8 +235,12 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Spacer */}
-      <div className="h-14 sm:h-[calc(1.75rem+4rem)]" id="navbar-spacer" />
+      {/* Spacer — matches header height and transitions with it */}
+      <div
+        className="transition-all duration-300"
+        style={{ height: scrolled ? '56px' : '80px' }}
+        id="navbar-spacer"
+      />
     </>
   )
 }
