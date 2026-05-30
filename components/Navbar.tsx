@@ -91,7 +91,7 @@ export default function Navbar() {
 
         {/* ── Desktop navigation — 3-column centered logo ── */}
         <nav className={`container-wide hidden lg:grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-300 ${
-          scrolled ? 'h-16' : 'h-20'
+          scrolled ? 'h-16' : 'h-[88px]'
         }`}>
           {/* Left links */}
           <ul className="flex items-center gap-0.5">
@@ -110,7 +110,7 @@ export default function Navbar() {
               width={200}
               height={94}
               className={`w-auto object-contain transition-all duration-300 group-hover:opacity-75 ${
-                scrolled ? 'h-12' : 'h-16'
+                scrolled ? 'h-12' : 'h-[72px]'
               }`}
               priority
             />
@@ -130,7 +130,7 @@ export default function Navbar() {
                 href="tel:+998955030001"
                 className="flex items-center gap-1.5 text-sm font-semibold text-slate hover:text-blue transition-colors duration-200"
               >
-                <Phone size={15} className="text-blue/50" />
+                <Phone size={scrolled ? 15 : 18} className="text-blue/50 transition-all duration-300" />
                 <span className="hidden xl:block">+998 (95) 503-00-01</span>
               </a>
               <button onClick={openPopup} className={`btn-primary transition-all duration-300 ${
@@ -144,7 +144,7 @@ export default function Navbar() {
 
         {/* ── Mobile navigation ── */}
         <div className={`lg:hidden flex items-center px-4 relative transition-all duration-300 ${
-          scrolled ? 'h-14' : 'h-20'
+          scrolled ? 'h-14' : 'h-[88px]'
         }`}>
           {/* Hamburger — left */}
           <button
@@ -152,7 +152,7 @@ export default function Navbar() {
             className="p-2 rounded-lg text-slate hover:bg-gray-100 transition-all duration-200 z-10"
             aria-label="Меню"
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {open ? <X size={scrolled ? 22 : 27} /> : <Menu size={scrolled ? 22 : 27} />}
           </button>
 
           {/* Logo — absolutely centered */}
@@ -163,7 +163,7 @@ export default function Navbar() {
               width={200}
               height={94}
               className={`w-auto object-contain transition-all duration-300 group-hover:opacity-75 ${
-                scrolled ? 'h-9' : 'h-14'
+                scrolled ? 'h-9' : 'h-[60px]'
               }`}
               priority
             />
@@ -175,7 +175,7 @@ export default function Navbar() {
             className="ml-auto z-10 p-2 rounded-lg text-blue hover:bg-blue/5 transition-all duration-200"
             aria-label="Позвонить"
           >
-            <Phone size={20} />
+            <Phone size={scrolled ? 20 : 24} className="transition-all duration-300" />
           </a>
         </div>
 
@@ -238,7 +238,7 @@ export default function Navbar() {
       {/* Spacer — matches header height and transitions with it */}
       <div
         className="transition-all duration-300"
-        style={{ height: scrolled ? '56px' : '80px' }}
+        style={{ height: scrolled ? '56px' : '88px' }}
         id="navbar-spacer"
       />
     </>
