@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
     const { error } = await resend.emails.send({
       from:    'Viva Dental <onboarding@resend.dev>',
-      to:      ['saidkarimovsarvar27@gmail.com'],
+      to:      ['oreon.ai.agency@gmail.com'],
       subject: `🦷 Новая заявка: ${name} — ${phone}`,
       html,
     })
